@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = ['dooco-pp4.herokuapp.com', 'localhost']
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'https://8000-dooco-pp4-cn40sqc1a56.ws-eu81.gitpod.io/']
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'https://dooco-pp4.herokuapp.com/', 'https://8000-dooco-pp4-cn40sqc1a56.ws-eu81.gitpod.io']
 
 
 # Application definition
@@ -77,7 +77,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pp4.wsgi.application'
 
-AUTH_USER_MODEL = "accounts.CustomUser"
+
+
+# AUTH_USER_MODEL = "accounts.CustomUser"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
