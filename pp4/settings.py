@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = ['dooco-pp4.herokuapp.com', 'localhost']
-
+CSRF_TRUSTED_ORIGINS = ['https://dooco-pp4.herokuapp.com/','https://8000-dooco-pp4-cn40sqc1a56.ws-eu81.gitpod.io/']
 
 
 # Application definition
