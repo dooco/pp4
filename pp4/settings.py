@@ -43,8 +43,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'cloudinary_storage',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'cloudinary',
     'accounts',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
 ]
 
 MIDDLEWARE = [
@@ -75,11 +81,16 @@ TEMPLATES = [
     },
 ]
 
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 WSGI_APPLICATION = 'pp4.wsgi.application'
 
 
 
-# AUTH_USER_MODEL = "accounts.CustomUser"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -137,6 +148,22 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+SITE_ID = 2
+LOGIN_REDIRECT_URL = '/'
+
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'OAUTH_PKCE_ENABLED': True,
+    }
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
