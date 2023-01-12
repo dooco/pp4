@@ -14,6 +14,10 @@
 </head>
 
 <body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0&appId=719780076534800&autoLogAppEvents=1"
+        nonce="PuNazdx3"></script>
 
     <div class="container text-dark mt-5">
         <div class="row justify-content-md-center">
@@ -24,6 +28,8 @@
                     <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
                     {% load socialaccount %}
                     <a href="{% provider_login_url 'facebook' method='oauth2' %}">Facebook OAuth2</a>
+                    <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with"
+                        data-layout="default" data-auto-logout-link="true" data-use-continue-as="true"></div>
                 </h2>
                 {% if user.is_authenticated %}
                 <p>Welcome, {{ user.username }} !</p>
