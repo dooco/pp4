@@ -91,7 +91,7 @@ AUTHENTICATION_BACKENDS = [
 
 WSGI_APPLICATION = 'pp4.wsgi.application'
 
-
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
 
 # Database
