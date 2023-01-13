@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <title>{% block head_title %}{% endblock %}</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,11 +10,13 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% block extra_head %}
+    {% endblock %}
 
-    <title>PP4 Welcome</title>
 </head>
 
 <body>
+    {% block body %}
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous"
         src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0&appId=719780076534800&autoLogAppEvents=1"
@@ -23,19 +26,34 @@
         <div class="row justify-content-md-center">
             <div class="col-md-5 p-3">
                 <h1>My Google Login Project</h1>
-                <h2>
-                    <a class="nav-link" href="{% url 'home' %}">Home /</a>
-                    <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
-                    {% load socialaccount %}
-                    <a href="{% provider_login_url 'facebook' method='oauth2' %}">Facebook OAuth2</a>
-                    <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with"
-                        data-layout="default" data-auto-logout-link="true" data-use-continue-as="true"></div>
-                </h2>
-                {% if user.is_authenticated %}
-                <p>Welcome, {{ user.username }} !</p>
-                {% else %}
-                <h1>Welcome Friend, please log in</h1>
+                {% if messages %}
+                <div>
+                    <strong>Messages:</strong>
+                    <ul>
+                        {% for message in messages %}
+                        <li>{{message}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
                 {% endif %}
+                <div>
+                    <strong>Menu:</strong>
+                    <ul>
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
+                        <li><a href="{% url 'account_change_password' %}">Change Password</a></li>
+                        <li><a href="{% url 'socialaccount_connections' %}">Social Accounts</a></li>
+                        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+                        {% else %}
+                        <li><a href="{% url 'account_login' %}">Sign In</a></li>
+                        <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                {% block content %}
+                {% endblock %}
+                {% endblock %}
+                {% block extra_body %}
             </div>
         </div>
     </div>
@@ -76,6 +94,7 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
+    {% endblock %}
 </body>
 
 </html>
