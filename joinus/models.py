@@ -8,7 +8,7 @@ STATUS = ((0, "Draft"), (1, "Published"))
 class Board_feature(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="feature_post")
+        User, on_delete=models.CASCADE, related_name='board_feature')
     update_on = models.DateTimeField(auto_now=True)
     board_name = models.CharField(max_length=255, unique=True)
     manufacturer = models.CharField(max_length=255, blank=True)
@@ -21,7 +21,6 @@ class Board_feature(models.Model):
     excerpt = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     io_pin_number = models.IntegerField(default=0)
-    excerpt = models.TextField(blank=True)
     status = models.IntegerField(choices=STATUS, default=0)
     avg_rating = models.ManyToManyField(User, related_name='feature_rating', blank=True)
 
@@ -37,7 +36,7 @@ class Board_feature(models.Model):
 
 class Review(models.Model):
 
-    post = models.ForeignKey(Board_feature, on_delete=models.CASCADE, related_name='comments')
+    post = models.ForeignKey(Board_feature, on_delete=models.CASCADE, related_name='post')
     name = models.CharField(max_length=80)
     email = models.EmailField()
     body = models.TextField()
