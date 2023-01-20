@@ -1,4 +1,4 @@
-"""pp4 URL Configuration
+"""product_review URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -14,18 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-from accounts import views
-from django.views.generic import TemplateView
-
+from django.urls import path
 
 urlpatterns = [
-    path('', views.login, name='login'),
-    path('signup/', views.signup, name='signup'),
     path('admin/', admin.site.urls),
-    path('joinus/', include('joinus.urls')),
-    # path('product_review/', include('product_review/product_review.urls')),
-    path('accounts/', include('allauth.urls')),
-    path('summernote/', include('django_summernote.urls')),
-    # path('accounts/', include('accounts.urls')),
 ]
