@@ -23,7 +23,7 @@
                                     <p class="author">Author: {{ board.author }}</p>
                                 </div>
                             </div>
-                            <a href="{% url 'post_detail' board.slug %}" class="post-link">
+                            <a href="{% url 'board_detail' board.slug %}" class="post-link">
                                 <h2 class="card-title">{{board.title }}</h2>
                                 <p class="card-text">{{ board.excerpt }}</p>
                             </a>
