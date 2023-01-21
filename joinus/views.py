@@ -12,7 +12,7 @@ class Board_featureList(generic.ListView):
     paginate_by = 6
 
 
-class BoardDetail(View):
+class Board_Detail(View):
     def get(self, request, slug, *args, **kwargs):
         queryset = Board_feature.objects.filter(status=1)
         board = get_object_or_404(queryset, slug=slug)

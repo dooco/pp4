@@ -9,7 +9,8 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.Board_featureList.as_view(), name='home')
+    path('', views.Board_featureList.as_view(), name='home'),
+    path('<slug:slug>/', views.Board_Detail.as_view(), name='board_detail'),
     # path("", include("allauth.account.urls"))
     ]
 
