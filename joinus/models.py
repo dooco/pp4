@@ -28,10 +28,10 @@ class Board_feature(models.Model):
         ordering = ['-created_on']
 
     def __str__(self):
-        return self.title
+        return self.board_name
 
     def number_of_ratings(self):
-        return self.avg_rating.count()
+        return self.avg_rating
 
 
 class Review(models.Model):
@@ -47,4 +47,4 @@ class Review(models.Model):
         ordering = ['created_on']
 
     def __str__(self):
-        return f"Comment {self.body} by {self.name}"
+        return f"Review {self.body} by {self.name}"
