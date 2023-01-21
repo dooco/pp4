@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
-from django.views import generic
+from django.shortcuts import render, get_object_or_404, reverse
+from django.views import generic, View
+from django.http import HttpResponseRedirect
 from .models import Board_feature
+from .forms import ReviewForm
 
 
 class Board_featureList(generic.ListView):
