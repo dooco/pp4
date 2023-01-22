@@ -10,7 +10,7 @@ class Board_featureAdmin(SummernoteModelAdmin):
     search_fields = ['manufacturer', 'special_features']
     prepopulated_fields = {'slug': ('board_name',)}
     list_filter = ('status', 'created_on')
-    summernote_fields = ('special_features')
+    summernote_fields = ('special_features','excerpt',)
 
 
 @admin.register(Review)
@@ -20,5 +20,5 @@ class ReviewAdmin(admin.ModelAdmin):
     search_fields = ['name', 'email', 'body']
     actions = ['approve_review']
 
-    def approve_review(self, request, queryset):
-        queryset.updata(approved=True)
+#     def approve_review(self, request, queryset):
+#         queryset.updata(approved=True)
