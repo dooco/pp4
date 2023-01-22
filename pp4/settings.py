@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django_summernote',
     'bootstrap4',
     'cloudinary',
+    'crispy_forms',
     'accounts',
     'joinus',
     'allauth',

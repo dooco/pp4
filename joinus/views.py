@@ -15,17 +15,17 @@ class Board_featureList(generic.ListView):
 class Board_Detail(View):
     def get(self, request, slug, *args, **kwargs):
         queryset = Board_feature.objects.filter(status=1)
-        board = get_object_or_404(queryset, slug=slug)
-        comments = board.comments.filter(approved=True).order_by('created_on')
-        liked = False
-        if board.avg_rating.filter(id=self.request.user.id).exists():
+        detail = get_object_or_404(queryset, slug=slug)
+        comments = detail.board.filter(approved=True).order_by('created_on')
+        rate = False
+        if detail.avg_rating.filter(id=self.request.user.id).exists():
             rate = True
 
         return render(
             request, 
             "board_detail.html",
             {
-                "board": board,
+                "detail": detail,
                 "comments": comments,
                 "commented": False,
                 "rate": rate,
