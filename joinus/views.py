@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
+# from django.views.decorators.csrf import csrf_exempt
 from .models import Board_feature
 from .forms import ReviewForm
 
@@ -35,9 +36,9 @@ class Board_Detail(View):
 
     def board(self, request, slug, *args, **kwargs):
         queryset = Board_feature.objects.filter(status=1)
-        board = get_object_or_404(queryset, slug=slug)
-        comments = board.comments.filter(approved=True).order_by('created_on')
-        liked = False
+        detail = get_object_or_404(queryset, slug=slug)
+        comments = detail.board.filter(approved=True).order_by('created_on')
+        rate = False
         if board.avg_rating.filter(id=self.request.user.id).exists():
             rate = True
         review_form = ReviewForm(data=request.POST)
@@ -55,14 +56,13 @@ class Board_Detail(View):
             request, 
             "board_detail.html",
             {
-                "board": board,
+                "detail": detail,
                 "comments": comments,
                 "commented": True,
                 "rate": rate,
                 "review_form": ReviewForm()
             },
         )
-
 
 
 def login(request):
