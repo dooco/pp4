@@ -10,7 +10,7 @@ class Board_featureAdmin(SummernoteModelAdmin):
     search_fields = ['manufacturer', 'special_features']
     prepopulated_fields = {'slug': ('board_name',)}
     list_filter = ('status', 'created_on')
-    summernote_fields = ('special_features','excerpt',)
+    summernote_fields = ('special_features', 'excerpt',)
 
 
 @admin.register(Review)
