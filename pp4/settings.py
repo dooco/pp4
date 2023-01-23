@@ -207,7 +207,39 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS =1
-ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 43200 # 1/2 day in seconds
+
+SUMMERNOTE_CONFIG = {
+    'iframe': True,
+    'summernote': {
+        'width': '800px',
+        'height': '400px',
+        'toolbar': [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'clear', ]],
+            ['color', ['forecolor', 'backcolor', ]],
+            ['misc', ['picture', 'fullscreen', 'codeview', 'print', 'help', ]],
+        ],
+    },
+    'js': (
+        '/static/summernote-ext-print.js',
+    ),
+    'js_for_inplace': (
+        '/static/summernote-ext-print.js',
+    ),
+    'css': (
+        '//cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.0/theme/base16-dark.min.css',
+    ),
+    'css_for_inplace': (
+        '//cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.0/theme/base16-dark.min.css',
+    ),
+    'codemirror': {
+        'theme': 'base16-dark',
+        'mode': 'htmlmixed',
+        'lineNumbers': 'true',
+    },
+    'lazy': False,
+}
