@@ -6,16 +6,16 @@
         <div class="row g-0">
             <div class="col-md-6 masthead-text">
                 <!-- Post title goes in these h1 tags -->
-                <h1 class="post-title">{{ board.board_name }}</h1>
+                <h1 class="post-title">{{ detail.board_name }}</h1>
                 <!-- Post author goes before the | the post's created date goes after -->
-                <p class="post-subtitle">{{ board.author }} | {{ board.created_on }}</p>
+                <p class="post-subtitle">{{ detail.author }} | {{ detail.created_on }}</p>
             </div>
             <div class="d-none d-md-block col-md-6 masthead-image">
                 <!-- The featured image URL goes in the src attribute -->
                 {% if "placeholder" in board.featured_image.url %}
                 <img src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg" width="100%">
                 {% else %}
-                <img src=" {{ board.featured_image.url }}" width="100%">
+                <img src=" {{ detail.featured_image.url }}" width="70%">
                 {% endif %}
             </div>
         </div>
@@ -29,20 +29,20 @@
                 <!-- The post content goes inside the card-text. -->
                 <!-- Use the | safe filter inside the template tags -->
                 <p class="card-text ">
-                    {{ board.content | safe }}
+                    {{ detail.content | safe }}
                 </p>
                 <div class="row">
 
                     <div class="col-1">
                         <strong>
                             {% if user.is_authenticated %}
-                            <form class="d-inline" action="{% url 'avg_rating' board.slug %}" method="POST">
+                            <form class="d-inline" action="{% url 'avg_rating' detail.slug %}" method="POST">
                                 {% csrf_token %}
                                 {% if liked %}
-                                <button type="submit" name="blogpost_id" value="{{board.slug}}" class="btn-like"><i
+                                <button type="submit" name="blogpost_id" value="{{detail.slug}}" class="btn-like"><i
                                         class="fas fa-heart"></i></button>
                                 {% else %}
-                                <button type="submit" name="blogpost_id" value="{{board.slug}}" class="btn-like"><i
+                                <button type="submit" name="blogpost_id" value="{{detail.slug}}" class="btn-like"><i
                                         class="far fa-heart"></i></button>
                                 {% endif %}
                             </form>
@@ -50,7 +50,7 @@
                             <span class="text-secondary"><i class="far fa-heart"></i></span>
                             {% endif %}
                             <!-- The number of likes goes before the closing strong tag -->
-                            <span class="text-secondary">{{ board.number_of_ratings }} </span>
+                            <span class="text-secondary">{{ detail.number_of_ratings }} </span>
                         </strong>
                     </div>
                     <div class="col-1">

@@ -28,7 +28,7 @@ class Board_Detail(View):
             {
                 "detail": detail,
                 "comments": comments,
-                "commented": False,
+                # "commented": False,
                 "rate": rate,
                 "review_form": ReviewForm()
             },
