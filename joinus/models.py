@@ -23,7 +23,8 @@ class Board_feature(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     io_pin_number = models.IntegerField(default=0)
     status = models.IntegerField(choices=STATUS, default=0)
-    avg_rating = models.ManyToManyField(User, related_name='feature_rating', blank=True)
+    avg_rating = models.ManyToManyField(
+        User, related_name='feature_rating', blank=True)
 
     class Meta:
         ordering = ['-created_on']
@@ -32,12 +33,13 @@ class Board_feature(models.Model):
         return self.board_name
 
     def number_of_ratings(self):
-        return self.avg_rating
+        return self.avg_rating.count()
 
 
 class Review(models.Model):
 
-    board = models.ForeignKey(Board_feature, on_delete=models.CASCADE, related_name='board')
+    board = models.ForeignKey(
+        Board_feature, on_delete=models.CASCADE, related_name='board')
     name = models.CharField(max_length=80)
     email = models.EmailField()
     body = models.TextField()

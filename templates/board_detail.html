@@ -36,7 +36,7 @@
                     <div class="col-1">
                         <strong>
                             {% if user.is_authenticated %}
-                            <form class="d-inline" action="{% url 'avg_rating' detail.slug %}" method="POST">
+                            <form class="d-inline" action="{% url 'board_like' detail.slug %}" method="POST">
                                 {% csrf_token %}
                                 {% if liked %}
                                 <button type="submit" name="blogpost_id" value="{{detail.slug}}" class="btn-like"><i

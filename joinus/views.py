@@ -23,23 +23,23 @@ class Board_Detail(View):
             rate = True
 
         return render(
-            request, 
+            request,
             "board_detail.html",
             {
                 "detail": detail,
                 "comments": comments,
-                # "commented": False,
+                "commented": False,
                 "rate": rate,
                 "review_form": ReviewForm()
             },
         )
 
-    def board(self, request, slug, *args, **kwargs):
+    def post(self, request, slug, *args, **kwargs):
         queryset = Board_feature.objects.filter(status=1)
         detail = get_object_or_404(queryset, slug=slug)
         comments = detail.board.filter(approved=True).order_by('created_on')
         rate = False
-        if board.avg_rating.filter(id=self.request.user.id).exists():
+        if detail.avg_rating.filter(id=self.request.user.id).exists():
             rate = True
         review_form = ReviewForm(data=request.POST)
 
@@ -65,5 +65,17 @@ class Board_Detail(View):
         )
 
 
-def login(request):
-    return render(request, 'login.html')
+class BoardLike(View):
+    
+    def post(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Board_feature, slug=slug)
+        if post.avg_rating.filter(id=request.user.id).exists():
+            post.avg_rating.remove(request.user)
+        else:
+            post.avg_rating.add(request.user)
+
+        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+# def login(request):
+#     return render(request, 'login.html')
