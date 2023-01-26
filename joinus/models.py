@@ -39,7 +39,7 @@ class Board_feature(models.Model):
 class Review(models.Model):
 
     board = models.ForeignKey(
-        Board_feature, on_delete=models.CASCADE, related_name='comments')
+        Board_feature, on_delete=models.CASCADE, related_name='board')
     name = models.CharField(max_length=80)
     email = models.EmailField()
     body = models.TextField()
