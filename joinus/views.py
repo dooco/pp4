@@ -76,6 +76,3 @@ class BoardLike(View):
 
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
-
-# def login(request):
-#     return render(request, 'login.html')
