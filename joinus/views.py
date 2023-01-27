@@ -75,5 +75,5 @@ class BoardLike(View):
         else:
             post.avg_rating.add(request.user)
 
-        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+        return HttpResponseRedirect(reverse('board_detail', args=[slug]))
 
