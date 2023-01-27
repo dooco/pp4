@@ -29,7 +29,7 @@ class Board_Detail(View):
                 "detail": detail,
                 "comments": comments,
                 "commented": False,
-                "liked": liked,
+                "rate": rate,
                 "review_form": ReviewForm()
             },
         )
@@ -38,9 +38,9 @@ class Board_Detail(View):
         queryset = Board_feature.objects.filter(status=1)
         detail = get_object_or_404(queryset, slug=slug)
         comments = detail.board.filter(approved=True).order_by('-created_on')
-        liked = False
+        rate = False
         if detail.avg_rating.filter(id=self.request.user.id).exists():
-            liked = True
+            rate = True
             
         review_form = ReviewForm(data=request.POST)
 
@@ -60,7 +60,7 @@ class Board_Detail(View):
                 "detail": detail,
                 "comments": comments,
                 "commented": True,
-                "liked": liked,
+                "rate": rate,
                 "review_form": ReviewForm()
             },
         )
