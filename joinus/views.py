@@ -41,13 +41,14 @@ class Board_Detail(View):
         rate = False
         if detail.avg_rating.filter(id=self.request.user.id).exists():
             rate = True
+            
         review_form = ReviewForm(data=request.POST)
 
         if review_form.is_valid():
             review_form.instance.email = request.user.email
             review_form.instance.name = request.user.username
             review = review_form.save(commit=False)
-            review.board = board
+            review.post = post
             review.save()
         else:
             review_form = ReviewForm()
