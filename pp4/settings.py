@@ -28,7 +28,9 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates',)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 ALLOWED_HOSTS = ['dooco-pp4.herokuapp.com', 'localhost']
 CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'https://dooco-pp4.herokuapp.com/', 'https://8000-dooco-pp4-cn40sqc1a56.ws-eu83.gitpod.io/']
