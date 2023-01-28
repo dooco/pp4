@@ -45,11 +45,12 @@ class Board_Detail(View):
         review_form = ReviewForm(data=request.POST)
 
         if review_form.is_valid():
-            review_form.instance.email = request.user.email
-            review_form.instance.name = request.user.username
+            review_form.instance.score = request.score
             review = review_form.save(commit=False)
             review.detail = detail
             review.save()
+            messages.success(
+                request, "Thank you, your review has been sent.")
         else:
             review_form = ReviewForm()
 
@@ -76,4 +77,3 @@ class BoardLike(View):
             post.avg_rating.add(request.user)
 
         return HttpResponseRedirect(reverse('board_detail', args=[slug]))
-

@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.models import User
 from .models import Board_feature
 from .models import Review
 from django_summernote.admin import SummernoteModelAdmin
@@ -15,9 +16,9 @@ class Board_featureAdmin(SummernoteModelAdmin):
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('name', 'body', 'board', 'created_on', 'approved')
+    list_display = ('user', 'body', 'board', 'created_on', 'approved')
     list_filter = ('approved', 'created_on')
-    search_fields = ['name', 'email', 'body']
+    search_fields = ['user', 'body']
     actions = ['approve_review']
 
     def approve_review(self, request, queryset):
