@@ -17,7 +17,7 @@ class Board_feature(models.Model):
     power = models.CharField(max_length=255, blank=True)
     clock_frequency = models.CharField(max_length=255, blank=True)
     conectivity = models.CharField(max_length=255, blank=True)
-    special_features = models.TextField(blank=True)
+    special_features = models.CharField(max_length=500, blank=True)
     featured_image = CloudinaryField('image', default='placeholder')
     excerpt = models.CharField(max_length=255, unique=True)
     created_on = models.DateTimeField(auto_now_add=True)
