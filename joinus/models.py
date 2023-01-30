@@ -49,4 +49,4 @@ class Review(models.Model):
         ordering = ['created_on']
 
     def __str__(self):
-        return f"Review {self.body} by {self.user}"
+        return f"Review {self.body} by {self.user} score {self.score}"
