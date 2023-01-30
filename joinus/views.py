@@ -30,7 +30,6 @@ class Board_Detail(View):
                 "comments": comments,
                 "commented": False,
                 "rate": rate,
-                'score': score,
                 "review_form": ReviewForm()
             },
         )
