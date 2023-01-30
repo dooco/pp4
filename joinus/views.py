@@ -30,6 +30,7 @@ class Board_Detail(View):
                 "comments": comments,
                 "commented": False,
                 "rate": rate,
+                'score': score,
                 "review_form": ReviewForm()
             },
         )
@@ -62,6 +63,7 @@ class Board_Detail(View):
                 "comments": comments,
                 "commented": True,
                 "rate": rate,
+                "score": score,
                 "review_form": ReviewForm()
             },
         )
