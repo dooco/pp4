@@ -46,7 +46,7 @@ class Board_Detail(View):
         review_form = ReviewForm(data=request.POST)
 
         if review_form.is_valid():
-            review_form.instance.score = score
+            review_form.instance.score = int(request.score)
             review = review_form.save(commit=False)
             review.detail = detail
             review.save()
