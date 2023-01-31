@@ -46,7 +46,6 @@ class Board_Detail(View):
         review_form = ReviewForm(data=request.POST)
 
         if review_form.is_valid():
-            review_form.instance.score = int(request.score)
             review = review_form.save(commit=False)
             review.detail = detail
             review.save()
@@ -69,13 +68,20 @@ class Board_Detail(View):
         )
 
 
-class BoardLike(View):
-    
-    def post(self, request, slug, *args, **kwargs):
+class Rate(View):
+    def rate(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Board_feature, slug=slug)
-        if post.avg_rating.filter(id=request.user.id).exists():
-            post.avg_rating.remove(request.user)
-        else:
-            post.avg_rating.add(request.user)
-
+        Review.objects.filter(post=post, user=request.user).delete()
+        post.rating_set.create(user=request.user, rating=rating)
         return HttpResponseRedirect(reverse('board_detail', args=[slug]))
+
+
+# class BoardLike(View):
+#     def post(self, request, slug, *args, **kwargs):
+#         post = get_object_or_404(Board_feature, slug=slug)
+#         if post.avg_rating.filter(id=request.user.id).exists():
+#             post.avg_rating.remove(request.user)
+#         else:
+#             post.avg_rating.add(request.user)
+
+        # return HttpResponseRedirect(reverse('board_detail', args=[slug]))

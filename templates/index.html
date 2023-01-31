@@ -14,8 +14,9 @@
                         <div class="card-body">
                             <div class="image-container">
                                 {% if "placeholder" in board.featured_image.url %}
-                                <img class="card-img-top"
-                                    src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg">
+                                <img class="card-img-top" src="/static/images/default.jpg">
+                                <!--
+                                    src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg"> -->
                                 {% else %}
                                 <img class="card-img-top" src=" {{ board.featured_image.url }}">
                                 {% endif%}
@@ -24,12 +25,19 @@
                                 </div>
                             </div>
                             <a href="{% url 'board_detail' board.slug %}" class="post-link">
-                                <h2 class="card-title">{{board.title }}</h2>
+                                <h2 class="card-title">{{ board.board_name }}</h2>
                                 <p class="card-text">{{ board.excerpt }}</p>
                             </a>
                             <hr />
-                            <p class="card-text text-muted h6">{{ board.created_on }} <i class="far fa-heart"></i>
-                                {{ board.board_name }}</p>
+                            <p class="card-text text-muted h6">{{ board.created_on }} {{board.manufacturer }}
+                                <h6 class="card-title">Avg rating:
+                                    <span class="fa fa-star {% if board.avg_rating > 0 %} checked {% endif %}"></span>
+                                    <span class="fa fa-star {% if board.avg_rating > 1 %} checked {% endif %}"></span>
+                                    <span class="fa fa-star {% if board.avg_rating > 2 %} checked {% endif %}"></span>
+                                    <span class="fa fa-star {% if board.avg_rating > 3 %} checked {% endif %}"></span>
+                                    <span class="fa fa-star {% if board.avg_rating > 4 %} checked {% endif %}"></span>
+                                </h6>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -48,7 +56,8 @@
             <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
             {% endif %}
             {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a>
+            </li>
             {% endif %}
         </ul>
     </nav>

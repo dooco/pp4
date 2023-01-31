@@ -30,15 +30,16 @@ class Board_feature(models.Model):
     class Meta:
         ordering = ['-created_on']
 
-    def __str__(self):
-        return self.board_name
-
     def number_of_ratings(self):
         return self.avg_rating.count()
- 
+
     def average_rating(self) -> float:
-        return Review.objects.filter(post=self).aggregate(
-            Avg("score"))["avg_rating"] or 0
+        return Review.objects.filter(board=self).aggregate(
+            Avg("score"))["score__avg"] or 0
+
+    def __str__(self):
+        return f"{self.board_name}: {sel.average_rating()}"
+
 
 
 class Review(models.Model):
