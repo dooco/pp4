@@ -24,18 +24,17 @@ class Board_feature(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     io_pin_number = models.IntegerField(default=0)
     status = models.IntegerField(choices=STATUS, default=0)
-    avg_rating = models.ManyToManyField(
-        User, related_name='feature_rating', blank=True)
+    avg_rating = models.PositiveIntegerField(default=0)
 
     class Meta:
         ordering = ['-created_on']
 
-    def average_rating(self) -> float:
+    def average_rating(self):
         return Review.objects.filter(board=self).aggregate(
             Avg("score"))["score__avg"] or 0
 
     def __str__(self):
-        return f"{self.board_name}: {sel.average_rating()}"
+        return f"{self.board_name}: {self.average_rating()}"
 
 
 class Review(models.Model):
@@ -45,7 +44,7 @@ class Review(models.Model):
     score = models.IntegerField(default=0)
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
-    approved = models.BooleanField(default=False)
+    approved = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['created_on']
