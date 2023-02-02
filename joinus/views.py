@@ -19,9 +19,6 @@ class Board_Detail(View):
         queryset = Board_feature.objects.filter(status=1)
         detail = get_object_or_404(queryset, slug=slug)
         comments = detail.board.filter(approved=True).order_by('-created_on')
-        rate = False
-        if detail.avg_rating.filter(id=self.request.user.id).exists():
-            rate = True
 
         return render(
             request,
@@ -39,9 +36,6 @@ class Board_Detail(View):
         queryset = Board_feature.objects.filter(status=1)
         detail = get_object_or_404(queryset, slug=slug)
         comments = detail.board.filter(approved=True).order_by('-created_on')
-        rate = False
-        if detail.avg_rating.filter(id=self.request.user.id).exists():
-            rate = True
             
         review_form = ReviewForm(data=request.POST)
 
