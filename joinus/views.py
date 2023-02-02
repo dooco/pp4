@@ -27,7 +27,6 @@ class Board_Detail(View):
                 "detail": detail,
                 "comments": comments,
                 "commented": False,
-                "rate": rate,
                 "review_form": ReviewForm()
             },
         )
@@ -55,7 +54,6 @@ class Board_Detail(View):
                 "detail": detail,
                 "comments": comments,
                 "commented": True,
-                "rate": rate,
                 "score": score,
                 "review_form": ReviewForm()
             },
