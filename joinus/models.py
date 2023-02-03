@@ -39,7 +39,7 @@ class Board_feature(models.Model):
 
 class Review(models.Model):
     board = models.ForeignKey(
-        Board_feature, on_delete=models.CASCADE, related_name='board', blank=True, null=True)
+        Board_feature, on_delete=models.CASCADE, related_name='board')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     score = models.IntegerField(default=0)
     body = models.TextField()
