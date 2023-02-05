@@ -70,6 +70,7 @@ class Rate(View):
         return HttpResponseRedirect(reverse('board_detail', args=[slug]))
 
 
+
 # class BoardLike(View):
 #     def post(self, request, slug, *args, **kwargs):
 #         post = get_object_or_404(Board_feature, slug=slug)
