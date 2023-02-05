@@ -39,6 +39,7 @@ class Board_Detail(View):
 
         if review_form.is_valid():
             review = review_form.save(commit=False)
+            review.user = request.user
             review.detail = detail
             review.save()
             messages.success(
