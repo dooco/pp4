@@ -53,7 +53,7 @@ class Board_Detail(View):
                 "detail": detail,
                 "comments": comments,
                 "commented": True,
-                "score": score,
+                # "score": score,
                 "review_form": ReviewForm()
             },
         )
