@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
+from django.utils.decorators import method_decorator
 from django.contrib import messages
 # from django.views.decorators.csrf import csrf_exempt
 from .models import Board_feature, Review
@@ -60,6 +61,7 @@ class Board_Detail(View):
         )
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class Rate(View):
     def rate(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Board_feature, slug=slug)
