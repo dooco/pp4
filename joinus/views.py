@@ -18,7 +18,9 @@ class Board_Detail(View):
         queryset = Board_feature.objects.filter(status=1)
         detail = get_object_or_404(queryset, slug=slug)
         comments = detail.board.filter(approved=True).order_by('-created_on')
-
+        liked = False
+        if detail.likes.filter(id=self.request.user.id).exists():
+            liked = True
         return render(
             request,
             "board_detail.html",
@@ -26,6 +28,7 @@ class Board_Detail(View):
                 "detail": detail,
                 "comments": comments,
                 "commented": False,
+                "liked": liked,
                 "review_form": ReviewForm()
             },
         )
@@ -34,12 +37,15 @@ class Board_Detail(View):
         queryset = Board_feature.objects.filter(status=1)
         detail = get_object_or_404(queryset, slug=slug)
         comments = detail.board.filter(approved=True).order_by('-created_on')
-            
+        liked = False
+        if detail.likes.filter(id=self.request.user.id).exists():
+            liked = True
         review_form = ReviewForm(data=request.POST)
 
         if review_form.is_valid():
+            review_form.instance.email = request.user.email
+            review_form.instance.name = request.user.username
             review = review_form.save(commit=False)
-            review.user = request.user
             review.detail = detail
             review.save()
             messages.success(
@@ -54,19 +60,20 @@ class Board_Detail(View):
                 "detail": detail,
                 "comments": comments,
                 "commented": True,
-                # "score": score,
-                "review_form": ReviewForm()
+                "review_form": review_form,
+                "liked": liked,
             },
         )
 
 
-class Rate(View):
+class BoardLike(View):
     def rate(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Board_feature, slug=slug)
-        Review.objects.filter(post=post, user=request.user).delete()
-        post.rating_set.create(user=request.user, rating=rating)
+        if post.likes.filter(id=request.user.id).exists():
+            post.likes.remove(request.user)
+        else:
+            post.likes.add(request.user)
         return HttpResponseRedirect(reverse('board_detail', args=[slug]))
-
 
 
 # class BoardLike(View):

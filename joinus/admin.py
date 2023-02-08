@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
-from .models import Board_feature
-from .models import Review
+from .models import Board_feature, Review
 from django_summernote.admin import SummernoteModelAdmin
 
 

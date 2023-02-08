@@ -38,7 +38,7 @@
                     <div class="col-1">
                         <strong>
                             {% if user.is_authenticated %}
-                            <form class="d-inline" action="{% url 'rate' detail.slug %}" method="POST">
+                            <form class="d-inline" action="{% url 'board_like' detail.slug %}" method="POST">
                                 {% csrf_token %}
                                 {% if liked %}
                                 <button type="submit" name="blogpost_id" value="{{ detail.slug }}" class="btn-like"><i
@@ -52,27 +52,8 @@
                             <span class="text-secondary"><i class="far fa-heart"></i></span>
                             {% endif %}
                             <!-- The number of likes goes before the closing strong tag -->
-                            <span class="text-secondary">{{ detail.number_of_ratings }} </span>
+                            <span class="text-secondary">{{ detail.number_of_likes }} </span>
                         </strong>
-                        <ul class="btn btn-light list-inline rating-list">
-                            <li onclick="rate(5, {{ post.id }})">
-                                <span>
-                                    <i class="fa fa-star {% if post.user_rating > 4 %} checked {% endif %}"
-                                        title="Rate 5"></i></li>
-                            <li onclick="rate(4, {{ post.id }})">
-                                <i class="fa fa-star {% if post.user_rating > 3 %} checked {% endif %}"
-                                    title="Rate 4"></i></li>
-                            <li onclick="rate(3, {{ post.id }})">
-                                <i class="fa fa-star {% if post.user_rating > 2 %} checked {% endif %}"
-                                    title="Rate 3"></i></li>
-                            <li onclick="rate(2, {{ post.id }})">
-                                <i class="fa fa-star {% if post.user_rating > 1 %} checked {% endif %}"
-                                    title="Rate 2"></i></li>
-                            <li onclick="rate(1, {{ post.id }})">
-                                <i class="fa fa-star {% if post.user_rating > 0 %} checked {% endif %}"
-                                    title="Rate 1"></i></li>
-                            </span>
-                        </ul>
                     </div>
                     <div class="col-1">
                         {% with comments.count as total_comments %}
