@@ -35,7 +35,6 @@ class Review(models.Model):
     board = models.ForeignKey(
         Board_feature, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    score = models.IntegerField(default=0)
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=True)
