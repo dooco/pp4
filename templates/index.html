@@ -8,15 +8,13 @@
         <!-- Blog Entries Column -->
         <div class="col-12 mt-3 left">
             <div class="row">
-                {% for board in board_list %}
+                {% for board in object_list %}
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="image-container">
                                 {% if "placeholder" in board.featured_image.url %}
                                 <img class="card-img-top" src="/static/images/default.jpg">
-                                <!--
-                                    src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg"> -->
                                 {% else %}
                                 <img class="card-img-top" src=" {{ board.featured_image.url }}">
                                 {% endif%}
@@ -29,14 +27,9 @@
                                 <p class="card-text">{{ board.excerpt }}</p>
                             </a>
                             <hr />
-                            <p class="card-text text-muted h6">{{ board.created_on }} {{board.manufacturer }}
-                                <h6 class="card-title">Avg rating:
-                                    <span class="fa fa-star {% if board.avg_rating > 0 %} checked {% endif %}"></span>
-                                    <span class="fa fa-star {% if board.avg_rating > 1 %} checked {% endif %}"></span>
-                                    <span class="fa fa-star {% if board.avg_rating > 2 %} checked {% endif %}"></span>
-                                    <span class="fa fa-star {% if board.avg_rating > 3 %} checked {% endif %}"></span>
-                                    <span class="fa fa-star {% if board.avg_rating > 4 %} checked {% endif %}"></span>
-                                </h6>
+                            <p class="card-text text-muted h6">{{ board.created_on | date:"D d M Y" }} |
+                                {{board.manufacturer }}
+                                <i class="far fa-heart"></i>{{ board.number_of_likes }}
                             </p>
                         </div>
                     </div>

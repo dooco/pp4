@@ -8,8 +8,9 @@ from django_summernote.admin import SummernoteModelAdmin
 class Board_featureAdmin(SummernoteModelAdmin):
     list_display = ('board_name', 'slug', 'status', 'created_on')
     search_fields = ['manufacturer', 'special_features']
-    prepopulated_fields = {'slug': ('board_name',)}
     list_filter = ('status', 'created_on')
+    prepopulated_fields = {'slug': ('board_name',)}
+    
     # summernote_fields = ('special_features', 'excerpt',)
 
 

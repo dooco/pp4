@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from .models import Board_feature, Review
@@ -17,7 +18,7 @@ class Board_Detail(View):
     def get(self, request, slug, *args, **kwargs):
         queryset = Board_feature.objects.filter(status=1)
         detail = get_object_or_404(queryset, slug=slug)
-        comments = detail.board.filter(approved=True).order_by('-created_on')
+        comments = detail.comments.filter(approved=True).order_by('-created_on')
         liked = False
         if detail.likes.filter(id=self.request.user.id).exists():
             liked = True
@@ -36,15 +37,14 @@ class Board_Detail(View):
     def post(self, request, slug, *args, **kwargs):
         queryset = Board_feature.objects.filter(status=1)
         detail = get_object_or_404(queryset, slug=slug)
-        comments = detail.board.filter(approved=True).order_by('-created_on')
+        comments = detail.comments.filter(approved=True).order_by('-created_on')
         liked = False
         if detail.likes.filter(id=self.request.user.id).exists():
             liked = True
         review_form = ReviewForm(data=request.POST)
 
         if review_form.is_valid():
-            review_form.instance.email = request.user.email
-            review_form.instance.name = request.user.username
+            user = User.objects.get(username=request.user)
             review = review_form.save(commit=False)
             review.detail = detail
             review.save()
@@ -67,7 +67,7 @@ class Board_Detail(View):
 
 
 class BoardLike(View):
-    def rate(self, request, slug, *args, **kwargs):
+    def post(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Board_feature, slug=slug)
         if post.likes.filter(id=request.user.id).exists():
             post.likes.remove(request.user)

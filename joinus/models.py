@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import Avg
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
@@ -25,17 +24,16 @@ class Board_feature(models.Model):
     class Meta:
         ordering = ['-created_on']
 
-    def average_rating(self) -> float:
-        return Review.objects.filter(board=self).aggregate(
-            Avg('score'))['score__avg'] or 0
-
     def __str__(self):
-        return f"{self.board_name}: {self.average_rating()}"
+        return self.board_name
+
+    def number_of_likes(self):
+        return self.likes.count()
 
 
 class Review(models.Model):
     board = models.ForeignKey(
-        Board_feature, on_delete=models.CASCADE, related_name='board')
+        Board_feature, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     score = models.IntegerField(default=0)
     body = models.TextField()
@@ -46,4 +44,4 @@ class Review(models.Model):
         ordering = ['created_on']
 
     def __str__(self):
-        return f"Review {self.board.board_name} score {self.score}"
+        return f"Review {self.body} by {self.user.username}"
