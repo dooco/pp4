@@ -11,9 +11,9 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.Board_featureList.as_view(), name='home'),
+    path('', views.BoardFeatureList.as_view(), name='home'),
     path('admin/', admin.site.urls),
-    path('<slug:slug>/', views.Board_Detail.as_view(), name='board_detail'),
+    path('<slug:slug>/', views.BoardDetail.as_view(), name='board_detail'),
     path('like/<slug:slug>', views.BoardLike.as_view(), name='board_like'),
     # path("", include("allauth.account.urls"))
     ]
