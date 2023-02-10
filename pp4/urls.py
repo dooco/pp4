@@ -24,7 +24,6 @@ urlpatterns = [
     # path('signup/', views.signup, name='signup'),
     path('', include('joinus.urls'), name='joinus'),
     # path('admin/', admin.site.urls),
-    # path('product_review/', include('product_review/product_review.urls')),
     path('accounts/', include('allauth.urls')),
     path('summernote/', include('django_summernote.urls')),
     # path('accounts/', include('accounts.urls')),

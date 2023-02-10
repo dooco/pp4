@@ -12,7 +12,7 @@ class BoardFeature(models.Model):
         User, on_delete=models.CASCADE, related_name='blog_posts')
     update_on = models.DateTimeField(auto_now=True)
     manufacturer = models.CharField(max_length=255, blank=True)
-    special_features = models.CharField(max_length=500, blank=True)
+    special_features = models.TextField()
     featured_image = CloudinaryField('image', default='placeholder')
     excerpt = models.CharField(max_length=255, unique=True)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -32,7 +32,7 @@ class BoardFeature(models.Model):
 
 class Review(models.Model):
     board = models.ForeignKey(
-        BoardFeature, on_delete=models.CASCADE, related_name='comments', null=True, blank=True)
+        BoardFeature, on_delete=models.CASCADE, related_name='comments')
     name = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
