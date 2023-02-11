@@ -28,13 +28,12 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates',)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 ALLOWED_HOSTS = ['dooco-pp4.herokuapp.com', 'localhost']
 CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'https://dooco-pp4.herokuapp.com/', 'https://8000-dooco-pp4-cn40sqc1a56.ws-eu85.gitpod.io']
-
 
 # Application definition
 
@@ -51,7 +50,6 @@ INSTALLED_APPS = [
     'bootstrap4',
     'cloudinary',
     'crispy_forms',
-    'accounts',
     'joinus',
     'allauth',
     'allauth.account',
@@ -220,6 +218,7 @@ SOCIALACCOUNT_PROVIDERS = {
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# AUTH_USER_MODEL = "accounts.CustomUser"
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS =1

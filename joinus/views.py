@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from .models import BoardFeature, Review

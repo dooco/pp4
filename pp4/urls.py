@@ -22,9 +22,9 @@ from django.views.generic import TemplateView
 urlpatterns = [
     # path('', views.login, name='login'),
     # path('signup/', views.signup, name='signup'),
+    # path('accounts/', include('accounts.urls')),
     path('', include('joinus.urls'), name='joinus'),
     # path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
     path('summernote/', include('django_summernote.urls')),
-    # path('accounts/', include('accounts.urls')),
+   
 ]
