@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import MaxValueValidator, MinValueValidator
 from cloudinary.models import CloudinaryField
 
 STATUS = ((0, "Draft"), (1, "Published"))
@@ -13,7 +12,7 @@ class BoardFeature(models.Model):
         User, on_delete=models.CASCADE, related_name='blog_posts')
     update_on = models.DateTimeField(auto_now=True)
     manufacturer = models.CharField(max_length=255, blank=True)
-    special_features = models.TextField()
+    special_features = models.TextField(blank=True)
     featured_image = CloudinaryField('image', default='placeholder')
     excerpt = models.CharField(max_length=255, unique=True)
     created_on = models.DateTimeField(auto_now_add=True)
