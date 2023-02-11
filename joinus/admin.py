@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
-from .models import BoardFeature, Review
+from .models import BoardFeature, Review, Category
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -23,3 +23,8 @@ class ReviewAdmin(admin.ModelAdmin):
 
     def approve_review(self, request, queryset):
         queryset.update(approved=True)
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('title',)
