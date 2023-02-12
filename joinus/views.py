@@ -87,9 +87,9 @@ def category_detail(request, slug):
 
 def feature_detail(request, category_slug, slug):
     feature = get_object_or_404(BoardFeature, slug=slug, status=1)
-    return render(request, 'pp4/feature.detail.html', {
+    return render(request, 'feature.detail.html', {
         'category': category,
-        'feature': feature
+        'feature': feature,
     })
 
 
