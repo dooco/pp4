@@ -21,7 +21,8 @@ class BoardFeature(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(
+        Category, related_name='feature', on_delete=models.CASCADE)
     update_on = models.DateTimeField(auto_now=True)
     manufacturer = models.CharField(max_length=255, blank=True)
     special_features = models.TextField(blank=True)

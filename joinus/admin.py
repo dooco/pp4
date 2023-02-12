@@ -28,3 +28,5 @@ class ReviewAdmin(admin.ModelAdmin):
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('title',)
+    prepopulated_fields = {'slug': ('title',)}
+

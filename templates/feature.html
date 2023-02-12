@@ -1,0 +1,6 @@
+<div class="flex flex-wrap">
+    {% for feature in features %}
+    <a href="{% url 'feature_detail' feature.category.slug feature.slug %}"></a>
+    <h2>{{ feature.title }}</h2>
+    {% endfor %}
+</div>

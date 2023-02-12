@@ -3,7 +3,7 @@ from django.views import generic, View
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.contrib import messages
-from .models import BoardFeature, Review
+from .models import BoardFeature, Review, Category
 from .forms import ReviewForm
 
 
@@ -74,6 +74,23 @@ class BoardLike(View):
         else:
             post.likes.add(request.user)
         return HttpResponseRedirect(reverse('board_detail', args=[slug]))
+
+
+def category_detail(request, slug):
+    category = get_object_or_404(Category, slug=slug)
+    feature = category.feature.filter(status=1)
+    return render(request, 'category_detail.html'), {
+        'category': category,
+        'feature': feature,
+    }
+
+
+def feature_detail(request, category_slug, slug):
+    feature = get_object_or_404(BoardFeature, slug=slug, status=1)
+    return render(request, 'pp4/feature.detail.html', {
+        'category': category,
+        'feature': feature
+    })
 
 
 # class BoardLike(View):
