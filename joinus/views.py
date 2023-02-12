@@ -79,10 +79,10 @@ class BoardLike(View):
 def category_detail(request, slug):
     category = get_object_or_404(Category, slug=slug)
     feature = category.feature.filter(status=1)
-    return render(request, 'category_detail.html'), {
+    return render(request, 'category_detail.html', {
         'category': category,
         'feature': feature,
-    }
+    })
 
 
 def feature_detail(request, category_slug, slug):
