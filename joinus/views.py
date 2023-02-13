@@ -76,7 +76,7 @@ class BoardLike(View):
         return HttpResponseRedirect(reverse('board_detail', args=[slug]))
 
 
-def category_detail(request, category_slug, slug):
+def category_detail(request, slug):
     category = get_object_or_404(Category, slug=slug)
     feature = category.feature.filter(status=1)
     return render(request, 'category_detail.html', {
@@ -85,11 +85,11 @@ def category_detail(request, category_slug, slug):
     })
 
 
-def feature_detail(request, feature_slug, slug):
-    feature = get_object_or_404(BoardFeature, slug=slug, status=1)
-    return render(request, 'feature.detail.html', {
-        'category': category,
-        'feature': feature,
+def feature_detail(request, category_slug, slug):
+    feature = get_object_or_404(BoardFeature, slug=slug)
+    print(feature)
+    return render(request, 'feature.html', {
+        'feature': feature
     })
 
 

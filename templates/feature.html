@@ -1,6 +1,20 @@
+{% load crispy_forms_tags %}
+<div class="masthead">
+    <div class="container">
+        <div class="row g-0">
+            <div class="col-md-6 masthead-text">
+                {% for feat in feature %}
+                <a href=" url 'feature_detail' feat.category.slug feat.slug %}">
+                    <h2>{{ feat }}</h2>
+                </a>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
 <div class="flex flex-wrap">
-    {% for feature in features %}
-    <a href="{% url 'feature_detail' feature.category.slug feature.slug %}"></a>
-    <h2>{{ feature.title }}</h2>
-    {% endfor %}
+    WELCOME to Features
+
+
 </div>
