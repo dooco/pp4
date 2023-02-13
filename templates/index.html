@@ -19,13 +19,12 @@
                                 <img class="card-img-top" src=" {{ board.featured_image.url }}">
                                 {% endif%}
                                 <div class="image-flash">
-                                    <p class="author">Author: {{ board.author }}</p>
+                                    <p class="author">{{ board.category }} : {{ board.author }}</p>
                                 </div>
                             </div>
                             <a href="{% url 'board_detail' board.slug %}" class="post-link">
                                 <h2 class="card-title">{{ board.board_name }}</h2>
                                 <p class="card-text">{{ board.excerpt }}</p>
-                                <p class="card-text">{{ board.category }}</p>
                             </a>
                             <hr />
                             <p class="card-text text-muted h6">{{ board.created_on | date:"D d M Y" }} |
