@@ -22,25 +22,19 @@
                 {% endif %}
             </div>
         </div>
-        <div class="row g-0">
-            <div class="col-md12">
-                {% if  detail.special_features %}
-                <p>{{ detail.special_features }}</p>
-                {% endif %}
-            </div>
-        </div>
     </div>
 </div>
-
 <div class="container">
     <div class="row">
         <div class="col card mb-4  mt-3 left top">
             <div class="card-body">
                 <!-- The post content goes inside the card-text. -->
                 <!-- Use the | safe filter inside the template tags -->
+                {% if  detail.special_features %}
                 <p class="card-text ">
-                    {{ detail.content | safe }}
+                    {{ detail.special_features | safe }}
                 </p>
+                {% endif %}
                 <div class="row">
 
                     <div class="col-1">

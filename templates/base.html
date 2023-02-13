@@ -41,6 +41,7 @@
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+                        <i class="fab fa-user">{{ user.username }}</i>
                     </li>
                     {% else %}
                     <li class="nav-item">
