@@ -5,8 +5,6 @@
 
 <div class="container-fluid">
     <div class="row">
-
-        <!-- Blog Entries Column -->
         <div class="col-12 mt-3 left">
             <div class="row">
                 {% for board in object_list %}
@@ -27,7 +25,7 @@
                                 <h2 class="card-title">{{ board.board_name }}</h2>
                                 <p class="card-text">{{ board.excerpt }}</p>
                             </a>
-                            <hr />
+                            <hr>
                             <p class="card-text text-muted h6">{{ board.created_on | date:"D d M Y" }} |
                                 {{board.manufacturer }}
                                 <i class="far fa-heart"></i>{{ board.number_of_likes }}

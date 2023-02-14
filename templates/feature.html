@@ -1,20 +1,54 @@
-{% load crispy_forms_tags %}
-<div class="masthead">
-    <div class="container">
-        <div class="row g-0">
-            <div class="col-md-6 masthead-text">
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mt-3 left">
+            <div class="row">
                 {% for feat in feature %}
-                <a href=" url 'feature_detail' feat.category.slug feat.slug %}">
-                    <h2>{{ feat }}</h2>
-                </a>
-
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="image-container">
+                                {% if "placeholder" in feat.featured_image.url %}
+                                <img class="card-img-top" src="/static/images/default.jpg">
+                                {% else %}
+                                <img class="card-img-top" src=" {{ feat.featured_image.url }}">
+                                {% endif%}
+                                <div class="image-flash">
+                                    <p class="author">{{ feat.category }} : {{ feat.author }}</p>
+                                </div>
+                            </div>
+                            <a href="{% url 'feature_detail' feat.category.slug feat.slug %}" class="post-link">
+                                <h2 class="card-title">{{ feat.board_name }}</h2>
+                                <p class="card-text">{{ feat.excerpt }}</p>
+                            </a>
+                            <hr />
+                            <p class="card-text text-muted h6">{{ feat.created_on | date:"D d M Y" }} |
+                                {{board.manufacturer }}
+                                <i class="far fa-heart"></i>{{ feat.number_of_likes }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:3 %}
+            </div>
+            <div class="row">
+                {% endif %}
                 {% endfor %}
             </div>
         </div>
     </div>
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
 </div>
-<div class="flex flex-wrap">
-    WELCOME to Features
-
-
-</div>
+{%endblock%}
