@@ -44,7 +44,8 @@ class BoardDetail(View):
         review_form = ReviewForm(data=request.POST)
 
         if review_form.is_valid():
-            review_form.instance.name = request.User.username
+            review_form.instance.email = request.user.email
+            review_form.instance.name = request.user.username
             review = review_form.save(commit=False)
             review.detail = detail
             review.save()
@@ -85,9 +86,15 @@ def category_detail(request, slug):
     })
 
 
+class FeatureList(generic.ListView):
+    model = BoardFeature
+    queryset = BoardFeature.objects.filter(status=1).order_by('-created_on')
+    template_name = 'index.html'
+    paginate_by = 6
+
+
 def feature_detail(request, category_slug, slug):
-    feature = get_object_or_404(BoardFeature, slug=slug)
-    print(feature)
+    feature = get_object_or_404(feature, slug=slug)
     return render(request, 'feature.html', {
         'feature': feature
     })
