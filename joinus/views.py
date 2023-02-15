@@ -45,7 +45,7 @@ class BoardDetail(View):
 
         if review_form.is_valid():
             review_form.instance.email = request.user.email
-            review_form.instance.name = request.user.username
+            review_form.instance.name = request.User.username
             review = review_form.save(commit=False)
             review.detail = detail
             review.save()
@@ -94,7 +94,7 @@ class FeatureList(generic.ListView):
 
 
 def feature_detail(request, category_slug, slug):
-    feature = get_object_or_404(feature, slug=slug)
+    feature = get_object_or_404(BoardFeatureList, slug=slug)
     return render(request, 'feature.html', {
         'feature': feature
     })
