@@ -45,7 +45,7 @@ class BoardDetail(View):
 
         if review_form.is_valid():
             review_form.instance.email = request.user.email
-            review_form.instance.name = request.User.username
+            review_form.instance.name = request.user.username
             review = review_form.save(commit=False)
             review.detail = detail
             review.save()
