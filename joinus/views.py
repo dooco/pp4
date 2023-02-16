@@ -1,20 +1,22 @@
 from django.shortcuts import render, get_object_or_404, reverse
-from django.views import generic, View
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.urls import reverse_lazy
 from .models import BoardFeature, Review, Category
 from .forms import ReviewForm
 
 
-class BoardFeatureList(generic.ListView):
+class BoardFeatureList(ListView):
     model = BoardFeature
     queryset = BoardFeature.objects.filter(status=1).order_by('-created_on')
     template_name = 'index.html'
     paginate_by = 6
 
 
-class BoardDetail(View):
+class BoardDetail(DetailView):
     def get(self, request, slug, *args, **kwargs):
         queryset = BoardFeature.objects.filter(status=1)
         detail = get_object_or_404(queryset, slug=slug)
@@ -68,7 +70,7 @@ class BoardDetail(View):
         )
 
 
-class BoardLike(View):
+class BoardLike(DetailView):
     def post(self, request, slug, *args, **kwargs):
         post = get_object_or_404(BoardFeature, slug=slug)
         if post.likes.filter(id=request.user.id).exists():
@@ -87,7 +89,7 @@ def category_detail(request, slug):
     })
 
 
-class CategoryDetail(View):
+class CategoryDetail(DetailView):
     def get(self, request, slug, *args, **kwargs):
         queryset = BoardFeature.objects.filter(status=1)
         detail = get_object_or_404(queryset, slug=slug)
@@ -145,3 +147,21 @@ def feature_detail(request, category_slug, slug):
     return render(request, 'board_detail.html', {
         'feature': feature
     })
+
+
+class PostCreate(CreateView):
+    model = BoardFeature
+    fields = ['board_name', 'category', 'manufacturer', 'special_features', 'excerpt', 'featured_image',]
+    template_name = 'post_new.html'
+    success_url = reverse_lazy('home')
+
+
+class PostUpdate(UpdateView):
+    model = BoardFeature
+    fields = ['board_name', 'category', 'manufacturer', 'special_features', 'excerpt', 'featured_image',]
+    success_url = reverse_lazy('home')
+
+
+class PostDelete(DeleteView):
+    model = BoardFeature
+    success_url = reverse_lazy('home')

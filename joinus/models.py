@@ -59,3 +59,6 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review {self.body} by {self.name}"
+
+    def get_absolute_url(self):
+        return reverse('post_edit', kwargs={'pk': self.pk})

@@ -17,6 +17,9 @@ urlpatterns = [
     path('board/<slug:slug>/', views.BoardDetail.as_view(), name='board_detail'),
     path('like/<slug:slug>', views.BoardLike.as_view(), name='board_like'),
     path('<slug:category_slug>/<slug:slug>/', views.BoardDetail.as_view(), name='feature_detail'),
+    path('new', views.PostCreate.as_view(), name='post_new'),
+    path('edit/<int:pk>', views.PostUpdate.as_view(), name='post_edit'),
+    path('delete/<int:pk>', views.PostDelete.as_view(), name='post_delete'),
     # path('feature/<slug:slug>/', views.CategoryDetail.as_view(), name='board_detail'),
     # path("", include("allauth.account.urls"))
     ]

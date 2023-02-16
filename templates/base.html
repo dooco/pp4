@@ -51,6 +51,18 @@
                         <a class="nav-link" href="{% url 'account_login' %}">Login</a>
                     </li>
                     {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'post_new' %}">Create</a>
+                    </li>
+                    {% if board_feature.id %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'post_edit' board_feature.id %}">Edit</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'post_delete' board_feature.id %}">Delete</a>
+                    </li>
+                    {% endif %}
                 </ul>
                 <span class="navbar-text text-muted">
                     Popular Board Reviews
