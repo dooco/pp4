@@ -44,11 +44,11 @@ class BoardDetail(View):
         review_form = ReviewForm(data=request.POST)
 
         if review_form.is_valid():
-            # review_form.instance.email = request.user.email
-            # review_form.instance.name = self.request.user.username
-            # review = review_form.save(commit=False)
-            # review.detail = detail
-            # review.save()
+            review_form.instance.email = request.user.email
+            review_form.instance.name = self.request.user.username
+            review = review_form.save(commit=False)
+            review.detail = detail
+            review.save()
             review = review_form.save()
             messages.success(
                 request, "Thank you, your review has been sent.")
