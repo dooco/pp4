@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils.text import slugify
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
@@ -21,9 +22,8 @@ class Category(models.Model):
 
 class BoardFeature(models.Model):
     board_name = models.CharField(max_length=255, unique=True)
-    slug = models.SlugField(max_length=200, unique=True)
-    author = models.ForeignKey(
-        User, on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=200)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(
         Category, related_name='feature', on_delete=models.CASCADE)
     update_on = models.DateTimeField(auto_now=True)
@@ -42,8 +42,15 @@ class BoardFeature(models.Model):
     def __str__(self):
         return self.board_name
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
     def number_of_likes(self):
         return self.likes.count()
+
+    def get_absolute_url(self):
+        return reverse('post_edit', kwargs={'pk': self.pk})
 
 
 class Review(models.Model):
