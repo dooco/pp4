@@ -160,7 +160,9 @@ class PostCreate(CreateView):
     success_url = reverse_lazy('home')
 
     def form_valid(self, form):
+      
         form.instance.author = self.request.user
+        # messages.success(request, 'Thank you, your post has been sent for moderation')
         return super(PostCreate, self).form_valid(form)
 
     # def get(self, request):

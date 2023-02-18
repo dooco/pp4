@@ -42,15 +42,16 @@ class BoardFeature(models.Model):
     def __str__(self):
         return self.board_name
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
+    def save(self, *args, **kwargs): 
+        if not self.slug:
+            self.slug = slugify(self.board_name)
+        return super().save(*args, **kwargs)
 
     def number_of_likes(self):
         return self.likes.count()
 
-    def get_absolute_url(self):
-        return reverse('post_edit', kwargs={'pk': self.pk})
+    # def get_absolute_url(self):
+    #     return reverse('post_edit', kwargs={'pk': self.pk})
 
 
 class Review(models.Model):
