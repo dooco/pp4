@@ -12,6 +12,10 @@ class PostForm(forms.ModelForm):
 
 
 class ReviewForm(forms.ModelForm):
+
+    # def __init__(self, *args, **kwargs):
+    #     super(PostCreate, self).__init__(*args, **kwargs)
+
     class Meta:
         model = Review
         fields = ['body',]

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} {{ detail.board_name }} {% endblock %}
+{% block title %} {{ board.board_name }} {% endblock %}
 {% block content %}
 {% load crispy_forms_tags %}
 <div class="masthead">
@@ -7,25 +7,25 @@
         <div class="row g-0">
             <div class="col-md-6 masthead-text">
                 <!-- Post title goes in these h1 tags -->
-                <h2 class="post-title">{{ detail.board_name }}</h2>
+                <h2 class="post-title">{{ board.board_name }}</h2>
                 <!-- Post author goes before the | the post's created date goes after -->
-                <p class="post-subtitle">{{ detail.author }} | {{ detail.created_on | date:"D d M Y" }} |
-                    {{ detail.manufacturer }} | {{detail.category}} | <a href="{% url 'post_edit' detail.slug %}"
+                <p class="post-subtitle">{{ board.author }} | {{ board.created_on | date:"D d M Y" }} |
+                    {{ board.manufacturer }} | {{board.category}} | <a href="{% url 'post_edit' board.slug %}"
                         class="post-subtitle"><i class="far fa-edit">Edit</i></a>
-                    <a href="{% url 'post_delete' detail.slug %}" class="post-subtitle"><i
+                    <a href="{% url 'post_delete' board.slug %}" class="post-subtitle"><i
                             class="fas fa-trash">Delete</i></a></p>
                 <!-- the if statement goes here -->
 
                 <!-- the endif goes here -->
 
-                <p class="post-subtitle">{{ detail.excerpt | safe }}</p>
+                <p class="post-subtitle">{{ board.excerpt | safe }}</p>
             </div>
             <div class="d-none d-md-block col-md-6 masthead-image">
                 <!-- The featured image URL goes in the src attribute -->
                 {% if "placeholder" in board.featured_image.url %}
                 <img src="/static/images/default.jpg" width="100%">
                 {% else %}
-                <img src=" {{ detail.featured_image.url }}" width="70%">
+                <img src=" {{ board.featured_image.url }}" width="70%">
                 {% endif %}
             </div>
         </div>
@@ -37,9 +37,9 @@
             <div class="card-body">
                 <!-- The post content goes inside the card-text. -->
                 <!-- Use the | safe filter inside the template tags -->
-                {% if  detail.special_features %}
+                {% if  board.special_features %}
                 <p class="card-text ">
-                    {{ detail.special_features | safe }}
+                    {{ board.special_features | safe }}
                 </p>
                 {% endif %}
                 <div class="row">
@@ -47,13 +47,13 @@
                     <div class="col-1">
                         <strong>
                             {% if user.is_authenticated %}
-                            <form class="d-inline" action="{% url 'board_like' detail.slug %}" method="POST">
+                            <form class="d-inline" action="{% url 'board_like' board.slug %}" method="POST">
                                 {% csrf_token %}
                                 {% if liked %}
-                                <button type="submit" name="blogpost_id" value="{{ detail.slug }}" class="btn-like"><i
+                                <button type="submit" name="blogpost_id" value="{{ board.slug }}" class="btn-like"><i
                                         class="fas fa-heart"></i></button>
                                 {% else %}
-                                <button type="submit" name="blogpost_id" value="{{ detail.slug }}" class="btn-like"><i
+                                <button type="submit" name="blogpost_id" value="{{ board.slug }}" class="btn-like"><i
                                         class="far fa-heart"></i></button>
                                 {% endif %}
                             </form>
@@ -61,7 +61,7 @@
                             <span class="text-secondary"><i class="far fa-heart"></i></span>
                             {% endif %}
                             <!-- The number of likes goes before the closing strong tag -->
-                            <span class="text-secondary">{{ detail.number_of_likes }} </span>
+                            <span class="text-secondary">{{ board.number_of_likes }} </span>
                         </strong>
                     </div>
                     <div class="col-1">

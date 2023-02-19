@@ -24,9 +24,12 @@ class BoardDetail(DetailView):
         # pk = self.kwargs.get('pk')
         queryset = BoardFeature.objects.filter(status=1)
         detail = get_object_or_404(queryset, slug=slug)
-        # post = BoardFeature.objects.get(pk=pk)
+        board = BoardFeature.objects.get(slug=slug)
+        form = ReviewForm()
+        comments = Review.objects.filter(board=board).order_by('-created_on')
+        
         # post = get_object_or_404(queryset, pk=pk)
-        comments = detail.comments.filter(approved=True).order_by('-created_on')
+        # comments = detail.comments.filter(approved=True).order_by('-created_on')
         liked = False
         if detail.likes.filter(id=self.request.user.id).exists():
             liked = True
@@ -35,11 +38,12 @@ class BoardDetail(DetailView):
             "board_detail.html",
             {
                 # "post": post,
-                "detail": detail,
+                "board": board,
                 "comments": comments,
                 "commented": False,
                 "liked": liked,
-                "review_form": ReviewForm()
+                "form": form
+                # "review_form": ReviewForm()
             },
         )
 
@@ -48,43 +52,44 @@ class BoardDetail(DetailView):
         # pk = self.kwargs.get('pk')
         
         queryset = BoardFeature.objects.filter(status=1)
-        # post = BoardFeature.objects.get(pk=pk)
+        board = BoardFeature.objects.get(slug=slug)
         # post = get_object_or_404(queryset, pk=pk)
         detail = get_object_or_404(queryset, slug=slug)
-        comments = detail.comments.filter(approved=True).order_by('-created_on')
+        # comments = detail.comments.filter(approved=True).order_by('-created_on')
         liked = False
         if detail.likes.filter(id=self.request.user.id).exists():
             liked = True
-        review_form = ReviewForm(data=request.POST)
+        form = ReviewForm(request.POST)
 
-        if review_form.is_valid():
-            review_form.instance.email = request.user.email
-            review_form.instance.name = self.request.user
-            review = review_form.save(commit=False)
-            review.detail = detail
-            review.save()
-            review = review_form.save()
+        if form.is_valid():
+            new_review = form.save(commit=False)
+            new_review.name = request.user
+            
+            new_review.board = board
+            new_review.save()
+            
             messages.success(
                 request, "Thank you, your review has been sent.")
         else:
-            review_form = ReviewForm()
+            form = ReviewForm()
 
+        comments = Review.objects.filter(board=board).order_by('-created_on')
         return render(
             request,
             "board_detail.html",
             {
                 # "post": post,
-                "detail": detail,
+                "board": board,
                 "comments": comments,
                 "commented": True,
                 "liked": liked,
-                "review_form": review_form,
+                "form": form,
             },
         )
 
 
 class BoardLike(DetailView):
-    def post(self, request, slug, pk, *args, **kwargs):
+    def post(self, request, slug, *args, **kwargs):
         post = get_object_or_404(BoardFeature, slug=slug)
         if post.likes.filter(id=request.user.id).exists():
             post.likes.remove(request.user)
