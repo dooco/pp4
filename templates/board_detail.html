@@ -10,7 +10,14 @@
                 <h2 class="post-title">{{ detail.board_name }}</h2>
                 <!-- Post author goes before the | the post's created date goes after -->
                 <p class="post-subtitle">{{ detail.author }} | {{ detail.created_on | date:"D d M Y" }} |
-                    {{ detail.manufacturer }} | {{detail.category}}</p>
+                    {{ detail.manufacturer }} | {{detail.category}} | <a href="{% url 'post_edit' detail.slug %}"
+                        class="post-subtitle"><i class="far fa-edit">Edit</i></a>
+                    <a href="{% url 'post_delete' detail.slug %}" class="post-subtitle"><i
+                            class="fas fa-trash">Delete</i></a></p>
+                <!-- the if statement goes here -->
+
+                <!-- the endif goes here -->
+
                 <p class="post-subtitle">{{ detail.excerpt | safe }}</p>
             </div>
             <div class="d-none d-md-block col-md-6 masthead-image">

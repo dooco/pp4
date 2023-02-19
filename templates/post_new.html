@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} Post Edit {% endblock %}
+{% block title %} Create New Post {% endblock %}
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
@@ -9,9 +9,9 @@
 {% endif %}
 {% block content %}
 
-<h2>Create</h2>
-
-<form method="post">{% csrf_token %}
+<h2>Create New Post</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Submit" />
 </form>

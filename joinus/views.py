@@ -20,8 +20,12 @@ class BoardFeatureList(ListView):
 
 class BoardDetail(DetailView):
     def get(self, request, slug, *args, **kwargs):
+
+        # pk = self.kwargs.get('pk')
         queryset = BoardFeature.objects.filter(status=1)
         detail = get_object_or_404(queryset, slug=slug)
+        # post = BoardFeature.objects.get(pk=pk)
+        # post = get_object_or_404(queryset, pk=pk)
         comments = detail.comments.filter(approved=True).order_by('-created_on')
         liked = False
         if detail.likes.filter(id=self.request.user.id).exists():
@@ -30,6 +34,7 @@ class BoardDetail(DetailView):
             request,
             "board_detail.html",
             {
+                # "post": post,
                 "detail": detail,
                 "comments": comments,
                 "commented": False,
@@ -39,7 +44,12 @@ class BoardDetail(DetailView):
         )
 
     def post(self, request, slug, *args, **kwargs):
+        
+        # pk = self.kwargs.get('pk')
+        
         queryset = BoardFeature.objects.filter(status=1)
+        # post = BoardFeature.objects.get(pk=pk)
+        # post = get_object_or_404(queryset, pk=pk)
         detail = get_object_or_404(queryset, slug=slug)
         comments = detail.comments.filter(approved=True).order_by('-created_on')
         liked = False
@@ -63,6 +73,7 @@ class BoardDetail(DetailView):
             request,
             "board_detail.html",
             {
+                # "post": post,
                 "detail": detail,
                 "comments": comments,
                 "commented": True,
@@ -73,7 +84,7 @@ class BoardDetail(DetailView):
 
 
 class BoardLike(DetailView):
-    def post(self, request, slug, *args, **kwargs):
+    def post(self, request, slug, pk, *args, **kwargs):
         post = get_object_or_404(BoardFeature, slug=slug)
         if post.likes.filter(id=request.user.id).exists():
             post.likes.remove(request.user)
@@ -165,28 +176,37 @@ class PostCreate(CreateView):
         # messages.success(request, 'Thank you, your post has been sent for moderation')
         return super(PostCreate, self).form_valid(form)
 
-    # def get(self, request):
-    #     form = self.(None)
-    #     return render(request, self.template_name, {'form': form})
 
-    # def form_valid(self, form):
-    #     self.object = form.save(commit=False)
-    #     self.object.author = self.request.user
-    #     self.object.save()
-    #     return super().form_valid(form)
+class PostUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = BoardFeature
+    template_name = 'post_edit.html'
+    fields = ['board_name', 'category', 'manufacturer', 'special_features', 'excerpt', 'featured_image',]
+    # success_url = reverse_lazy('home')
+
+    def get_success_url(self):
+        slug = self.kwargs['slug']
+        # pk = self.kwargs['pk']
+        return reverse_lazy('board_detail', kwargs={'slug': slug})
     
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.author
+
     # def form_valid(self, form):
     #     form.instance.author = self.request.user
-    #     form.instance.slug = slugify(self.request.board_name)
-    #     return super(PostCreate, self).form_valid(form)
+    #     return super(PostUpdate, self).form_valid(form)
 
 
-class PostUpdate(UpdateView):
+class PostDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = BoardFeature
-    fields = ['board_name', 'category', 'manufacturer', 'special_features', 'excerpt', 'featured_image',]
+    template_name = 'post_delete.html'
     success_url = reverse_lazy('home')
 
-
-class PostDelete(DeleteView):
-    model = BoardFeature
-    success_url = reverse_lazy('home')
+    # def get_success_url(self):
+    #     slug = self.kwargs['slug']
+    #     # pk = self.kwargs['pk']
+    #     return reverse_lazy('board_detail', kwargs={'slug': slug})
+    
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.author
