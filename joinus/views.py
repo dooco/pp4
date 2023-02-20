@@ -119,11 +119,11 @@ class CategoryDetail(DetailView):
             request,
             "board_detail.html",
             {
-                "detail": detail,
+                "board": board,
                 "comments": comments,
                 "commented": False,
                 "liked": liked,
-                "review_form": ReviewForm()
+                "form": form
             },
         )
 
@@ -153,11 +153,11 @@ class CategoryDetail(DetailView):
             request,
             "board_detail.html",
             {
-                "detail": detail,
+                "board": board,
                 "comments": comments,
                 "commented": True,
                 "liked": liked,
-                "review_form": review_form,
+                "form": form,
             },
         )
 
