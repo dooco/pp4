@@ -140,3 +140,7 @@ body {
     background: transparent;
     border: none;
 }
+
+.selector-for-some-widget {
+    box-sizing: content-box;
+}

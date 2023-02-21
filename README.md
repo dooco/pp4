@@ -1,108 +1,114 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Developer Board Review
 
-Welcome Matt Rudge,
+A Code Institute course project requirement. You can see the deployed site [here] https://dooco-pp4.herokuapp.com/
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+## Introduction
+A hobby electronic and microprocessor development site where users can post articles and can add comments in order to build a community of developers sharing their creations. This blog style website can provide a platform for hobbyists to showcase their electronic and microprocessor projects and connect with other like-minded individuals. Users can post their projects along with detailed descriptions and images allowing other users to learn from and appreciate their work. Additionally, comments and likes can provide a means for users to share feedback, offer advice, and show their support for fellow hobbyists. This can lead to a vibrant community of makers, where users can learn from each other, collaborate on projects, and push the boundaries of hobby electronics and microprocessor development.
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+## WEBSITE DESIGN
+### The strategy plane
+#### Goals
+Users can post articles and can add comments:
+1. Allow visitors view posts from users.
+2. Visitors can register and become a user that can post and comment
+3. Users can post detailed information and image of their projects.
+4. Users can edit and delets posts.
+5. Users can comment on other user's posts. 
+6. Admin can moderate posts and comments.
+7. Admin can add, edit, delete posts.
+8. Admin can add and delete categories for users to assign their projects to.
 
-## Gitpod Reminders
+## Scope plane
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
 
-`python3 -m http.server`
+## Technologies
 
-A blue button should appear to click: _Make Public_,
+### Languages used:
 
-Another blue button should appear to click: _Open Browser_.
+- HTML 5
+- CSS3
+- Python
+- 
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+### Libraries and Programs used: 
 
-A blue button should appear to click: _Make Public_,
+- Git, for version control.
+- GitHub, for storing code and deploying site.
+- Gitpod, Used to build project and editing the code.
+- Django, a python based framework to develop this project
+- Bootstrap, for HTML design templates.
+- Cloudinary, to store images. 
+- Figma, to mockup the design.
+- ElephantSQL, database through Heroku.
+- W3C for validation of HTML and CSS.
+- Pep8CI for validation of Python.
+- Summernote, for usage in the admin panel.
+- Heroku, for deploying the project. 
+- Convertion, for converting JPG to AVIF. 
 
-Another blue button should appear to click: _Open Browser_.
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+--------
 
-To log into the Heroku toolbelt CLI:
+## Testing
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+### Project set-up and deployment steps
+### Create Repository
 
-------
 
-## Release History
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+#### To create a new repository:
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+-  Log in to GitHub.
+-  Click on 'repositories'.
+-  Click on 'new' button, which create a new repository.
+-  Select CodeInstitute template from the dropdown menu. 
+-  Name project by adding title, 'PP4'.
+-  Select 'Add Read.Me'.
+-  Click 'create repository'.
+-  Open repository and click green 'GitPod' button to create workspace.
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+#### Install Django 
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+- Install Django: pip3 install 'django' 
+- Create project: django-admin startproject PP4 .
+- Create app: python3 manage.py startapp joinus
+- Add app to installed settings: INSTALLED_APPS = [ ... 'django.contrib.staticfiles', 'joinus',]
+- Migrate: python3 manage.py migrate
+- Run http server to confirm installation was successful: python3 mange.py runserver
+#### Install libraries
+- Install Cloudinary: pip3 install cloudinary
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+- Create requirements
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+Connect to Heroku and ElephantSQL
+- Create Heroku App
+- Create new instance on Elephant SQL and copy DB url
+- Create env.py, adding the secret key. Ensure env.py is in gitignore
+- Import env.py into Settings, and edit secret key accordingly
+- Comment out original databases in Settings
+- Connect to ElephantSQL
+- Make migrations
+- Test connect to ElephantSQL was successful
+- Add config vars to Heroku
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+Connect to Cloudinary
+- Add Cloudinary API environment variable to env.py
+- Add Cloudinary API environment variable to Heroku Config Vars
+- Add DISABLE_COLLECTSTATIC to Heroku config vars
+- In Settings,  "Installed Apps", add cloudinary_storage and cloudinary
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+Set up Directories and deploy
+- In Settings, under STATIC_URL add STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage', and add STATICFILES_DIRS, STATIC_ROOT, MEDIA_URL, DEFAULT_FILE_STORAGE
+- Add Templates Directory under BASE_DIR in settings, and fill in brackets for "DIR": []
+- Add Heroku host name to ALLOWED_HOSTS
+- Add top level directories
+- Add a procfile
+- In Heroku, link to GitHub as the deployment method
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+#### Final deployment
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
-
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
-
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
-
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
-
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
-
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
-
-------
-
-## FAQ about the uptime script
-
-**Why have you added this script?**
-
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
-
-**How will this affect me?**
-
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
-
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
-
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
-
-**So….?**
-
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
-
-**Can I opt out?**
-
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
-
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
-
-**Anything more?**
-
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
-
----
-
-Happy coding!
+- In settings, 
+    - Set DEBUG to False. If this is not done, cloudinary images won't be served and traceback error messages will be shown to the user (which can also reveal credentials that can benefit hackers).
+- Update Heroku configuration settings. Remove CollectStatic.
+    

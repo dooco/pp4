@@ -1,5 +1,6 @@
 asgiref==3.6.0
 cloudinary==1.30.0
+coverage==7.1.0
 dj-database-url==1.2.0
 dj3-cloudinary-storage==0.0.6
 Django==4.1.5
@@ -12,6 +13,7 @@ gunicorn==20.1.0
 heroku==0.1.4
 oauthlib==3.2.2
 psycopg2==2.9.5
+psycopg2-binary==2.9.5
 PyJWT==2.6.0
 python-dateutil==1.5
 python3-openid==3.2.0
