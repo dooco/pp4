@@ -169,7 +169,7 @@ def feature_detail(request, category_slug, slug):
     })
 
 
-class PostCreate(CreateView):
+class PostCreate(LoginRequiredMixin, CreateView):
     model = BoardFeature
     fields = ['board_name', 'category', 'manufacturer', 'special_features', 'excerpt', 'featured_image',]
     template_name = 'post_new.html'

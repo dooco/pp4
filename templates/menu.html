@@ -1,3 +1,5 @@
 {% for category in categories %}
-<a href="{% url 'category_detail' category.slug %}" class="nav-link">{{ category.title }}</a>
+<div class="mx-2">
+    <a href="{% url 'category_detail' category.slug %}" class="nav-link me-auto">{{ category.title }}</a>
+</div>
 {% endfor %}
