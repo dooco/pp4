@@ -2,45 +2,44 @@
 {% block title %} {{ board.board_name }} {% endblock %}
 {% block content %}
 {% load crispy_forms_tags %}
-<div class="masthead">
+<div>
     <div class="container">
         <div class="row g-0">
-            <div class="col-md-6 masthead-text">
-                <h2 class="post-title">{{ board.board_name }}</h2>
-                <p class="post-subtitle">{{ board.author }} | {{ board.created_on | date:"D d M Y" }} |
-                    {{ board.manufacturer }} | {{board.category}} | <a href="{% url 'post_edit' board.slug %}"
-                        class="post-subtitle"><i class="far fa-edit">Edit</i></a>
-                    <a href="{% url 'post_delete' board.slug %}" class="post-subtitle"><i
-                            class="fas fa-trash">Delete</i></a></p>
+            <!-- <div class="col-md-6 masthead-text"> -->
+            <div class="col-md-6">
+                <h2 class="post-title">{{ board.board_name }} | <a href="{% url 'post_edit' board.slug %}"
+                        class="post-title"><i class="far fa-edit"></i></a>
+                    <a href="{% url 'post_delete' board.slug %}" class="post-title"><i class="fas fa-trash"></i></a>
+                </h2>
+                <p class="card-text">{{ board.author }} | {{ board.created_on | date:"D d M Y" }} |
+                    {{ board.manufacturer }} | {{board.category}} </p>
+                </h2>
                 <!-- the if statement goes here -->
-
                 <!-- the endif goes here -->
-
-                <p class="post-subtitle">{{ board.excerpt | safe }}</p>
+                <p class="card-text">{{ board.excerpt | safe }}</p>
             </div>
-            <div class="d-none d-md-block col-md-6 masthead-image">
+            <!-- <div class="d-none d-md-block col-md-6 masthead-image"> -->
+            <div class="d-none d-md-block col-md-6">
                 <!-- The featured image URL goes in the src attribute -->
                 {% if "placeholder" in board.featured_image.url %}
-                <img src="/static/images/default.jpg" style="float:right;width:100%;height:100%;object-fit:cover;">
+                <img src="/static/images/default.jpg">
                 {% else %}
-                <img src=" {{ board.featured_image.url }}" style="float:right;width:100%;height:100%;object-fit:cover;">
+                <img src=" {{ board.featured_image.url }}">
                 {% endif %}
             </div>
+
         </div>
     </div>
     <div class="container">
         <div class="row">
             <div class="col card mb-4  mt-3 left top">
                 <div class="card-body">
-                    <!-- The post content goes inside the card-text. -->
-                    <!-- Use the | safe filter inside the template tags -->
                     {% if  board.special_features %}
                     <p class="card-text ">
                         {{ board.special_features | safe }}
                     </p>
                     {% endif %}
                     <div class="row">
-
                         <div class="col-1">
                             <strong>
                                 {% if user.is_authenticated %}
@@ -122,5 +121,7 @@
             </div>
         </div>
     </div>
+</div>
 
-    {% endblock content %}
+
+{% endblock content %}
