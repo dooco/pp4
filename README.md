@@ -1,22 +1,53 @@
 # Developer Board Review
 
 A Code Institute course project requirement. You can see the deployed site [here] https://dooco-pp4.herokuapp.com/
-
+## Project Overview
+The aim of this project is to demonstrate skills in developing a Full Stack Application using the Django framework accomplished through a blog syle application where a community of electronic hobbiests post their projects and comment on others.
 ## Introduction
 A hobby electronic and microprocessor development site where users can post articles and can add comments in order to build a community of developers sharing their creations. This blog style website can provide a platform for hobbyists to showcase their electronic and microprocessor projects and connect with other like-minded individuals. Users can post their projects along with detailed descriptions and images allowing other users to learn from and appreciate their work. Additionally, comments and likes can provide a means for users to share feedback, offer advice, and show their support for fellow hobbyists. This can lead to a vibrant community of makers, where users can learn from each other, collaborate on projects, and push the boundaries of hobby electronics and microprocessor development.
+## User Experience
+### Visitor
+* As a visitor I want to be able to view articles on electronic projects.
+* As a visitor I want to be able to select an article I am interested in and view its full content.
+* As a visitor I want to be able to select a category of priject I am interested in and view projecte in that category.
+### Registered User
+* As a visitor I want to be able to register for an account so that I can post articles.
+* As a registered user I want to be able to post articles on projects I am working on or post articles on electronic kits I am interested in.
+* As a registered user I want to able to easily log in and out of my account so that I can access my posts.
+* As a registered user I want to be able to comment and like other user's articles, to provide feedback on their posts.
+* As a registered user I want to be able to add an image to my post.
+* As a registered user I want to be able edit and delets my posts.
+### Admin
+* As an admin I want to be able to log in and view uses, groups, social accounts and models.
+* As an admin I want to be able to add and delete users and social accounts.
+* As an admin I want to be able to search for posts.
+* As an admin I want to be able to view posts under different headings.
+* As an admin I want to moderate posts and comments.
+* As an admin I want to be able to add, edit, delete posts.
+* As an admin I want to be able to add and delete categories for users to assign their projects to.
 
 ## WEBSITE DESIGN
 ### The strategy plane
-#### Goals
-Users can post articles and can add comments:
-1. Allow visitors view posts from users.
-2. Visitors can register and become a user that can post and comment
-3. Users can post detailed information and image of their projects.
-4. Users can edit and delets posts.
-5. Users can comment on other user's posts. 
-6. Admin can moderate posts and comments.
-7. Admin can add, edit, delete posts.
-8. Admin can add and delete categories for users to assign their projects to.
+Minimum requirements:
+
+Visitor doesn't need to login to view content but is restricted on adding comments and posting.
+The user must be able to sign in and sign out of the site allowing extra functionality.
+Admin should see be able to access the admin panel with admin username and password.
+There must be a way to manage user posts with full Create / Read / Update / Delete functionality.
+The customer must have information about the location of the restaurant.
+The customer must have links to the address (map location), telephone number, email and social media links should be in the footer
+If time permits, or for future development
+
+A separate contact page.
+Automation to delete bookings when there are no-shows, or the reservation date is in the past.
+Ability to edit menu items using a styled form.
+
+#### 
+
+
+
+
+
 
 ## Scope plane
 
