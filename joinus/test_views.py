@@ -46,26 +46,4 @@ class TestDjango(TestCase):
         })
         self.assertEqual(response.context['commented'], True)
 
-    # def test_can_add_item(self):
-    #     response = self.client.post('post_new', {'name': 'Test Added Item'})
-    #     self.assertRedirects(response, 'board_detail.html')
-
-    # def test_get_edit_item_page(self):
-    #     item = Item.objects.create(name='Test Edit Item')
-    #     response = self.client.get(f'/edit/{item.id}')
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertTemplateUsed(response, 'post_edit.html')
-
-    # def test_can_delete_item(self):
-    #     item = Item.objects.create(name='Test Delete Item')
-    #     response = self.client.get(f'/delete/{item.id}')
-    #     self.assertRedirects(response, '/')
-    #     existing_items = Item.objects.filter(id=item.id)
-    #     self.assertEqual(len(existing_items), 0)
-
-
-
-
-
-
-
+   
