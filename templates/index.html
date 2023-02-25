@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Welcome{% endblock %}
 
 {% block content %}
@@ -6,8 +7,8 @@
 <div class="container-fluid">
     <!-- Hero -->
     <div class="p-5 text-center bg-image rounded-3">
-        <img src="../static/images/hero-img-h300.png" class="img-fluid" width="100%" height="300px"
-            alt="electronic hobbiest image">
+        <img src="https://res.cloudinary.com/dklz0mnqm/image/upload/v1677324476/hero-img-h300_gp0lhp.jpg"
+            class="img-fluid" width="100%" height="300px" alt="electronic hobbiest image">
     </div>
     <!-- Hero -->
     <div class="row">
@@ -15,11 +16,12 @@
             <div class="row">
                 {% for board in object_list %}
                 <div class="col-md-4">
-                    <div class="card mb-4">
+                    <div class="card mb-4" style="width: 25rem; height: 40rem;">
                         <div class="card-body">
                             <div class="image-container">
                                 {% if "placeholder" in board.featured_image.url %}
-                                <img class="card-img-top" src="/static/images/default.jpg">
+                                <img class="card-img-top"
+                                    src="https://res.cloudinary.com/dklz0mnqm/image/upload/v1677325023/default_pjtpue.jpg">
                                 {% else %}
                                 <img class="card-img-top" src=" {{ board.featured_image.url }}">
                                 {% endif%}
@@ -29,8 +31,9 @@
                             </div>
                             <a href="{% url 'board_detail' board.slug %}" class="post-link text-decoration-none">
                                 <h2 class="card-title">{{ board.board_name }}</h2>
-                                <p class="card-text">{{ board.excerpt }}</p>
                             </a>
+                            <p class="card-text">{{ board.excerpt }}</p>
+
                             <hr>
                             <p class="card-text text-muted h6">{{ board.created_on | date:"D d M Y" }} |
                                 {{board.manufacturer }}

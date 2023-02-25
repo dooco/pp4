@@ -43,7 +43,7 @@ A hobby electronic and microprocessor development site where users can post arti
 
 
 # Surface Plane
-## WEBSITE DESIGN
+## Website Design
 
 ### Colours used
 Colours used include
