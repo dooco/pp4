@@ -15,10 +15,10 @@
                 <p class="card-text">{{ board.author }} | {{ board.created_on | date:"D d M Y" }} |
                     {{ board.manufacturer }} | {{board.category}} </p>
                 </h2>
-                {% if user.is_authenticated and user == post.author %}
+                {% if user.is_authenticated and user == board.author %}
                 <h1>User is Author</h1>
                 {% else %}
-                <h1>User not author {{ user.is_authenticated | board.author</h1> 
+                <h1>User not author {{ board.author }}</h1>
                 {% endif %}
                 <!-- the endif goes here -->
                 <p class="card-text">{{ board.excerpt | safe }}</p>
