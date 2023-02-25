@@ -7,15 +7,17 @@
         <div class="row g-0">
             <!-- <div class="col-md-6 masthead-text"> -->
             <div class="col-md-6">
-                <h2 class="post-title">{{ board.board_name }} | {% if 'user.is_authenticated' == 'detail.author' %}<a
-                        href="{% url 'post_edit' board.slug %}" class="post-title"><i class="far fa-edit"></i></a>
+                <h2 class="post-title">{{ board.board_name }} | <a href="{% url 'post_edit' board.slug %}"
+                        class="post-title"><i class="far fa-edit"></i></a>
                     <a href="{% url 'post_delete' board.slug %}" class="post-title"><i class="fas fa-trash"></i></a>
                 </h2>
-                {% endif %}
+
                 <p class="card-text">{{ board.author }} | {{ board.created_on | date:"D d M Y" }} |
                     {{ board.manufacturer }} | {{board.category}} </p>
                 </h2>
-                <!-- the if statement goes here -->
+                {% if 'user.is_authenticated' == 'detail.author' %}
+                <h1>User is Author</h1>
+                {% endif %}
                 <!-- the endif goes here -->
                 <p class="card-text">{{ board.excerpt | safe }}</p>
             </div>
