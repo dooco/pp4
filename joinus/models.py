@@ -60,7 +60,7 @@ class Review(models.Model):
     name = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
-    approved = models.BooleanField(default=True)
+    approved = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['created_on']

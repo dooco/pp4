@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% block title %} {{ board.board_name }} {% endblock %}
 {% block content %}
 {% load crispy_forms_tags %}
@@ -107,7 +108,7 @@
                     <!-- For later -->
                     {% if commented %}
                     <div class="alert alert-success" role="alert">
-                        Your comment is welcome
+                        Your comment is submitted for review
                     </div>
                     {% else %}
                     {% if user.is_authenticated %}

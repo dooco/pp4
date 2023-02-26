@@ -9,7 +9,8 @@
                         <div class="card-body">
                             <div class="image-container">
                                 {% if "placeholder" in feat.featured_image.url %}
-                                <img class="card-img-top" src="/static/images/default.jpg">
+                                <img class="card-img-top"
+                                    src="https://res.cloudinary.com/dklz0mnqm/image/upload/v1677325023/default_pjtpue.jpg">
                                 {% else %}
                                 <img class="card-img-top" src=" {{ feat.featured_image.url }}">
                                 {% endif%}
