@@ -6,8 +6,8 @@
 <div>
     <div class="container">
         <div class="row g-0">
-            <!-- <div class="col-md-6 masthead-text"> -->
             <div class="col-md-6">
+                <!-- check if user is both authenticated and is the author of post -->
                 <h2 class="post-title">{{ board.board_name }} | <a href="{% url 'post_new' board.slug %}"
                         class="post-title"><i
                             class="fas fa-plus text-muted"></i></a>{% if user.is_authenticated and user == board.author %}
@@ -16,22 +16,20 @@
                     <a href="{% url 'post_delete' board.slug %}" class="post-title"><i
                             class="fas fa-trash text-muted"></i></a>
                 </h2>
+                <!-- the endif goes here -->
                 {% endif %}
                 <p class="card-text">{{ board.author }} | {{ board.created_on | date:"D d M Y" }} |
                     {{ board.manufacturer }} | {{board.category}} </p>
                 </h2>
-
-
-                <!-- the endif goes here -->
                 <p class="card-text">{{ board.excerpt | safe }}</p>
             </div>
-            <!-- <div class="d-none d-md-block col-md-6 masthead-image"> -->
             <div class="d-none d-md-block col-md-6">
-                <!-- The featured image URL goes in the src attribute -->
+                <!-- featured image URL goes in the src attribute -->
                 {% if "placeholder" in board.featured_image.url %}
-                <img src="/static/images/default.jpg">
+                <img src="https://res.cloudinary.com/dklz0mnqm/image/upload/v1677325023/default_pjtpue.jpg"
+                    alt="default image electronic workstation">
                 {% else %}
-                <img src=" {{ board.featured_image.url }}">
+                <img src=" {{ board.featured_image.url }}" alt="image of project">
                 {% endif %}
             </div>
 
@@ -42,13 +40,14 @@
             <div class="col card mb-4  mt-3 left top">
                 <div class="card-body">
                     {% if  board.special_features %}
-                    <p class="card-text ">
+                    <div class="card-text ">
                         {{ board.special_features | safe }}
-                    </p>
+                    </div>
                     {% endif %}
                     <div class="row">
                         <div class="col-1">
                             <strong>
+                                <!-- check for user authentication -->
                                 {% if user.is_authenticated %}
                                 <form class="d-inline" action="{% url 'board_like' board.slug %}" method="POST">
                                     {% csrf_token %}
@@ -63,14 +62,14 @@
                                 {% else %}
                                 <span class="text-secondary"><i class="far fa-heart"></i></span>
                                 {% endif %}
-                                <!-- The number of likes goes before the closing strong tag -->
+                                <!-- number of likes  -->
                                 <span class="text-secondary">{{ board.number_of_likes }} </span>
                             </strong>
                         </div>
                         <div class="col-1">
                             {% with comments.count as total_comments %}
                             <strong class="text-secondary"><i class="far fa-comments"></i>
-                                <!-- Our total_comments variable goes before the closing strong tag -->
+                                <!--  total_comments  -->
                                 {{ total_comments }}</strong>
                             {% endwith %}
                         </div>

@@ -13,7 +13,7 @@ The aim of this project is to demonstrate skills in developing a Full Stack Appl
 ## Introduction
 A hobby electronic and microprocessor development site where users can post articles and can add comments in order to build a community of developers sharing their creations. This blog style website can provide a platform for hobbyists to showcase their electronic and microprocessor projects and connect with other like-minded individuals. Users can post their projects along with detailed descriptions and images allowing other users to learn from and appreciate their work. Additionally, comments and likes can provide a means for users to share feedback, offer advice, and show their support for fellow hobbyists. This can lead to a vibrant community of makers, where users can learn from each other, collaborate on projects, and push the boundaries of hobby electronics and microprocessor development.
 ## User Stories
-[Project ]
+[Issues](https://github.com/issues)
 ### Visitor
 1. As a visitor I can view a list of articles on home page so that I can pick out articles I am interested in to read.
 2. As a visitor I can click on an article so that I can read its full content.
@@ -48,7 +48,8 @@ A hobby electronic and microprocessor development site where users can post arti
 ## Website Design
 
 ### Colours used
-Colours used include:
+![Colours used include](/static/images/readme/website-colours-img.jpg)
+
 Main background colour: #F9FAFC
 light background background colour: #445261
 masthear text colour: #445261
@@ -56,9 +57,19 @@ card image flash colour: #23BBBB
 
 
 ### Fonts
-Fonts used are google Roboto font and 
+Fonts used are google fonts:
+
+![Google font Lato](/static/images/readme/font-lato.jpg)
+
+
+![Google font Roboto](/static/images/readme/font-roboto.jpg)
+
+![Navbar](/static/images/readme/navbar-img.jpg)
+
 ### Imagery
-Hero image on index page is an image from
+Hero image on index page is an image from:
+
+![hero](/static/images/readme/hero-img.jpg)
 
 ### The strategy plane
 Minimum requirements:
@@ -212,8 +223,11 @@ There are many ways of testing code, the most common are manual testing and auto
 
 
 
+![Python test.py](/static/images/readme/test-result.jpg)
 
+![HTML validation](/static/images/readme/w3c-html.jpg)
 
+![CSS validation](/static/images/readme/w3c-css-img.jpg)
 ### Create Repository
 
 
