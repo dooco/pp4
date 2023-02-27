@@ -18,7 +18,7 @@ class BoardFeatureAdmin(SummernoteModelAdmin):
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ('name', 'body', 'board', 'created_on', 'approved')
     list_filter = ('approved', 'created_on')
-    search_fields = ['user', 'body']
+    search_fields = ('user', 'body')
     actions = ['approve_review']
 
     def approve_review(self, request, queryset):

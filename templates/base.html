@@ -1,8 +1,8 @@
 {% load static %}
 {% load menu %}
-
 <!DOCTYPE html>
-<html class="h-100">
+
+<html lang="en">
 
 <head>
     <title>Microprocessor Developer Board Review</title>
@@ -29,7 +29,7 @@
                 <!-- logo -->
                 <a class="navbar-brand" href="{% url 'home' %}"><span class="brand">D<span
                             class="red-o">ev</span>elop<span class="red-o">er</span> B<span class="red-o">oa</span>rd
-                        R<span class="red-o">evi</span>ew</span></span></span></a>
+                        R<span class="red-o">evi</span>ew</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                     aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -58,9 +58,9 @@
                 </div>
                 <!-- menu of categories -->
                 <div class="row">
-                    <span class="navbar-text text-muted">
+                    <div class="navbar-text text-muted">
                         <div class="d-flex flex-nowrap">{% menu %}</div>
-                    </span>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -84,13 +84,15 @@
     </main>
     <!-- footer -->
     <footer class="footer mt-auto py-3 dark-bg">
-        <p class="m-0 text-center text-white">PP4 Project</p>
-        <p class="m-0 text-center text-white">Follow us: <i class="fab fa-facebook-square ms-3"></i>
-            <i class="fab fa-twitter-square ms-3"></i>
-            <i class="fab fa-instagram-square ms-3"></i>
-            <i class="fab fa-youtube-square ms-3"></i></p>
+        <p class="m-0 text-center text-white">Developer Board Review</p>
+        <p class="m-0 text-center text-white">Follow us: <a href="https://www.facebook.com/" target="_blank"><i
+                    class="fab fa-facebook-square ms-3"></i></a>
+            <a href="https://twitter.com/home" target="_blank"><i class="fab fa-twitter-square ms-3"></i></a>
+            <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram-square ms-3"></i></a>
+            <a href="https://github.com" target="_blank"><i class="fab fa-github-square ms-3"></i></a></p>
     </footer>
     <script>
+        // js code to wait 2 seconds, then clear message
         setTimeout(function () {
             let messages = document.getElementById('msg');
             let alert = new bootstrap.Alert(messages);
@@ -103,4 +105,4 @@
 
 </body>
 
-</html
+</html>

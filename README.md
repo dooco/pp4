@@ -148,6 +148,9 @@ The project had 8 milestones. Milsestones were set up as headings to group user 
 - Add credentials from social account providers.
 
 #### Test
+There are many ways of testing code, the most common are manual testing and automated testing. In order to complete manual testing, a list of all the features your site has, the different types of input it can accept, and what arevthe expected outcomes. Each time there's a change to code, the test method needs to go through every item on that list and test it. Automated testing can be achieved by a script and  instead of manually going through each test a built in python test function itterates through the pre-programmed tests . Python already comes with a set of tools and libraries to help you create automated tests for your application
+
+[Manual User Experience Tests](https://res.cloudinary.com/dklz0mnqm/raw/upload/v1677482969/pp4-validation-excel_lxyanr.xlsx)
 #### Deploy to Heroku
 
  
