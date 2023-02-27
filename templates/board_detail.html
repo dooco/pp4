@@ -18,8 +18,8 @@
                 </h2>
                 <!-- the endif goes here -->
                 {% endif %}
-                <p class="card-text">{{ board.author }} | {{ board.created_on | date:"D d M Y" }} |
-                    {{ board.manufacturer }} | {{board.category}} </p>
+                <div class="card-text">{{ board.author }} | {{ board.created_on | date:"D d M Y" }} |
+                    {{ board.manufacturer }} | {{board.category}} </div>
                 </h2>
                 <p class="card-text">{{ board.excerpt | safe }}</p>
             </div>
