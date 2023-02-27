@@ -14,14 +14,9 @@ urlpatterns = [
     path('', views.BoardFeatureList.as_view(), name='home'),
     path('admin/', admin.site.urls),
     path('<slug:slug>/', views.category_detail, name='category_detail'),
-  
-    path('board/<int:pk>/', views.BoardDetail.as_view(), name='board_detail'),
-    
     path('board/<slug:slug>/', views.BoardDetail.as_view(), name='board_detail'),
     path('like/<slug:slug>', views.BoardLike.as_view(), name='board_like'),
-    
     path('<slug:category_slug>/<slug:slug>/', views.BoardDetail.as_view(), name='feature_detail'),
-   
     path('new/<slug:slug>', views.PostCreate.as_view(), name='post_new'),
     path('board/<slug:slug>', views.PostUpdate.as_view(), name='post_edit'),
     path('delete/<slug:slug>', views.PostDelete.as_view(), name='post_delete'),
