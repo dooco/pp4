@@ -14,7 +14,7 @@ The aim of this project is to demonstrate skills in developing a Full Stack Appl
 A hobby electronic and microprocessor development site where users can post articles and can add comments in order to build a community of developers sharing their creations. This blog style website can provide a platform for hobbyists to showcase their electronic and microprocessor projects and connect with other like-minded individuals. Users can post their projects along with detailed descriptions and images allowing other users to learn from and appreciate their work. Additionally, comments and likes can provide a means for users to share feedback, offer advice, and show their support for fellow hobbyists. This can lead to a vibrant community of makers, where users can learn from each other, collaborate on projects, and push the boundaries of hobby electronics and microprocessor development.
 
 ## User Stories
-
+User stories are documented on guthub's issues:
 [Issues](https://github.com/issues)
 ### Visitor
 1. As a visitor I can view a list of articles on home page so that I can pick out articles I am interested in to read.
@@ -89,9 +89,17 @@ Footer
 ![footer](/static/images/readme/footer.jpg)
 ### Login / logout pages
 
-![Login](/static/images/readme/si)
+![Login](/static/images/readme/signin-form.jpg)
+![Logout](/static/images/readme/signout.jpg)
+![Register](/static/images/readme/signup-form.jpg)
 ### Home page
+
+![Home](/static/images/readme/home-img.jpg)
 ### Detail page
+
+![Detail](/static/images/readme/detail-page.jpg)
+
+![Comment](/static/images/readme/comment-form.jpg)
 
 
 ### The strategy plane
@@ -203,23 +211,21 @@ and paste it into the env.py file in your project. Make sure that the env.py fil
 
 4. Add a SECRET_KEY both to the env.py file and in the config vars on Heroku.
 
-5. In the Gitpod settings.py file, remove the insecure SECRET_KEY and replace it with the environment variable (SECRET_KEY) that was created.
+5. In the settings.py file, replace insecure SECRET_KEY with the environment variable (SECRET_KEY) that was created.
 
-6. Replace existing DATABASES section in settings.py file with the DATABASE_URL environment variable that is located in the env.py file.
+6. Comment out sqlite DATABASES section in settings.py file and add DATABASE_URL environment variable (from env.py).
 
-7. Ensure that all static and files have been added to the settings.py file in Gitpod.
+7. Add static details as per cloudinary and sommernote to the settings.py.
 
-8. Add the TEMPLATES_DIR to settings.py file in Gitpod and link it in the TEMPLATES section.
+8. Link TEMPLATES_DIR in settings.py to TEMPLATES.
 
-Make sure that the project name for the Heroku app has been added as an allowed host in Gitpod.
+9. Add 'project name' for the Heroku app has been added as an ALLOWED_HOSTS in settings.py.
 
-Ensure to create a Procfile and add web: gunicorn activities.wsgi to this file
+10. Create a Procfile and add web: 'web: gunicorn project_name.wsgi'.
 
-Make sure that the DEBUG flag is set to DEBUG = 'DEVELOPMENT' in os.environ in settings.py file in Gitpod
+11. Make sure that the DEBUG flag is set to DEBUG = False in settings.py.
 
-Add STRIPE_PUBLIC_KEY, STRIPE_SECRET_KEY, STRIPE_WH_SECRET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and USE_AWS to config vars on Heroku
-
-Make sure that all dependencies have been added to the requirements.txt file using the command pip3 freeze
+12. Make sure that all dependencies have been added to the requirements.txt file using the command pip3 freeze --local > requirements.txt
 
  
 
@@ -326,11 +332,15 @@ It is important to validate both HTML and CSS code to ensure readability and con
 
 As there are only a few scripts embedded in the html code a visual check on validation of code was deemed to be appropriate and no validation issues were observed.
 
-### Lighthouse Accessibility
 
 ### Known Bugs
+- Allauth login not working on github provider.
+- Last minute eror occured when deploying to Heroku, had to set DISABLE_COLLECTSTATIC = 1
 
 ### Bugs Fixed
+- When running the html checker some of my divs were not completed, so I fixed them.
+- The javascript scripts are included in script html tag the base.html file. Best practice would be to include it in static/js folder and only include in the files where they are needed.
+
 
 
 ### Create Repository
@@ -388,12 +398,18 @@ Set up Directories and deploy
 #### Final deployment
 
 - In settings, 
-    - Set DEBUG to False. 
-
-    - Set X_FRAME_OPTIONS = 'SAMEORIGIN'
-
-    - Update Heroku configuration settings. Remove COLLECTSTATIC.
+- Set DEBUG to False. 
+- Set X_FRAME_OPTIONS = 'SAMEORIGIN'
+- Update Heroku configuration settings. Remove COLLECTSTATIC.
 
 If this is not done, on error, traceback error messages will be shown to the user (revealing credentials and other secure information).
+## Credits and Acknowledgements
+- A major thanks to my mentor, Ronan McClelland, was as always there to guide me through the project and provide encouragement.
+- Thanks to all Code Institute's mentors that assisted in coding.
+- Django documentation on all aspects of django settings.
+- W3Schools with coding issues.
+- Stack overflow with all sorts of answers.
+- Code instiute's walk throughs for project setup and github template.
+- Bootstrap documentation for layout.
+- Photos from iStock and Pexels
 
-    
