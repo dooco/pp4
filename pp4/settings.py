@@ -32,7 +32,7 @@ DEBUG = False
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 ALLOWED_HOSTS = ['dooco-pp4.herokuapp.com', 'localhost', 'https://8000-dooco-pp4-cn40sqc1a56.ws-eu88.gitpod.io']
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'https://dooco-pp4.herokuapp.com/', 'https://8000-dooco-pp4-cn40sqc1a56.ws-eu88.gitpod.io' ]
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'https://dooco-pp4.herokuapp.com/', 'https://8000-dooco-pp4-cn40sqc1a56.ws-eu88.gitpod.io']
 
 # Application definition
 
@@ -162,7 +162,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 SUMMERNOTE_THEME = 'bs4'
 
 
-
 MESSAGE_TAGS = {
         messages.DEBUG: 'alert-info',
         messages.INFO: 'alert-info',
@@ -221,8 +220,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # AUTH_USER_MODEL = "accounts.CustomUser"
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS =1
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
-ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 43200 # 1/2 day in seconds
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 43200  # 1/2 day in seconds
+

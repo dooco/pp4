@@ -45,5 +45,3 @@ class TestDjango(TestCase):
             'body': 'This is a test comment'
         })
         self.assertEqual(response.context['commented'], True)
-
-   

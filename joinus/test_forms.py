@@ -4,7 +4,7 @@ from .forms import ReviewForm, PostForm
 
 
 class TestReviewForm(TestCase):
-    
+
     def test_body_is_required(self):
         form = ReviewForm({'body': ''})
         self.assertFalse(form.is_valid())

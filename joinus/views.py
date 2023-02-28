@@ -21,15 +21,12 @@ class BoardFeatureList(ListView):
 class BoardDetail(DetailView):
     def get(self, request, slug, *args, **kwargs):
 
-        # pk = self.kwargs.get('pk')
         queryset = BoardFeature.objects.filter(status=1)
         detail = get_object_or_404(queryset, slug=slug)
         board = BoardFeature.objects.get(slug=slug)
         form = ReviewForm()
         comments = Review.objects.filter(board=board).order_by('-created_on')
-        
-        # post = get_object_or_404(queryset, pk=pk)
-        # comments = detail.comments.filter(approved=True).order_by('-created_on')
+
         liked = False
         if detail.likes.filter(id=self.request.user.id).exists():
             liked = True
@@ -37,25 +34,19 @@ class BoardDetail(DetailView):
             request,
             "board_detail.html",
             {
-                # "post": post,
                 "board": board,
                 "comments": comments,
                 "commented": False,
                 "liked": liked,
                 "form": form
-                # "review_form": ReviewForm()
             },
         )
 
     def post(self, request, slug, *args, **kwargs):
-        
-        # pk = self.kwargs.get('pk')
-        
+
         queryset = BoardFeature.objects.filter(status=1)
         board = BoardFeature.objects.get(slug=slug)
-        # post = get_object_or_404(queryset, pk=pk)
         detail = get_object_or_404(queryset, slug=slug)
-        # comments = detail.comments.filter(approved=True).order_by('-created_on')
         liked = False
         if detail.likes.filter(id=self.request.user.id).exists():
             liked = True
@@ -64,10 +55,8 @@ class BoardDetail(DetailView):
         if form.is_valid():
             new_review = form.save(commit=False)
             new_review.name = request.user
-            
             new_review.board = board
             new_review.save()
-            
             messages.success(
                 request, "Thank you, your review has been sent.")
         else:
@@ -78,7 +67,6 @@ class BoardDetail(DetailView):
             request,
             "board_detail.html",
             {
-                # "post": post,
                 "board": board,
                 "comments": comments,
                 "commented": True,
@@ -171,35 +159,27 @@ def feature_detail(request, category_slug, slug):
 
 class PostCreate(LoginRequiredMixin, CreateView):
     model = BoardFeature
-    fields = ['board_name', 'category', 'manufacturer', 'special_features', 'excerpt', 'featured_image',]
+    fields = ['board_name', 'category', 'manufacturer', 'special_features', 'excerpt', 'featured_image', ]
     template_name = 'post_new.html'
     success_url = reverse_lazy('home')
 
     def form_valid(self, form):
-      
         form.instance.author = self.request.user
-        # messages.success(request, 'Thank you, your post has been sent for moderation')
         return super(PostCreate, self).form_valid(form)
 
 
 class PostUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = BoardFeature
     template_name = 'post_edit.html'
-    fields = ['board_name', 'category', 'manufacturer', 'special_features', 'excerpt', 'featured_image',]
-    # success_url = reverse_lazy('home')
+    fields = ['board_name', 'category', 'manufacturer', 'special_features', 'excerpt', 'featured_image', ]
 
     def get_success_url(self):
         slug = self.kwargs['slug']
-        # pk = self.kwargs['pk']
         return reverse_lazy('board_detail', kwargs={'slug': slug})
-    
+
     def test_func(self):
         post = self.get_object()
         return self.request.user == post.author
-
-    # def form_valid(self, form):
-    #     form.instance.author = self.request.user
-    #     return super(PostUpdate, self).form_valid(form)
 
 
 class PostDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -207,11 +187,6 @@ class PostDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     template_name = 'post_delete.html'
     success_url = reverse_lazy('home')
 
-    # def get_success_url(self):
-    #     slug = self.kwargs['slug']
-    #     # pk = self.kwargs['pk']
-    #     return reverse_lazy('board_detail', kwargs={'slug': slug})
-    
     def test_func(self):
         post = self.get_object()
         return self.request.user == post.author

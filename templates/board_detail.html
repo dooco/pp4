@@ -15,9 +15,10 @@
                             class="far fa-edit text-muted"></i></a>
                     <a href="{% url 'post_delete' board.slug %}" class="post-title"><i
                             class="fas fa-trash text-muted"></i></a>
+
+                    <!-- the endif goes here -->
+                    {% endif %}
                 </h2>
-                <!-- the endif goes here -->
-                {% endif %}
                 <div class="card-text">{{ board.author }} | {{ board.created_on | date:"D d M Y" }} |
                     {{ board.manufacturer }} | {{board.category}}
                 </div>
@@ -86,11 +87,11 @@
             <div class="col-md-8 card mb-4  mt-3 ">
                 <h3>Comments:</h3>
                 <div class="card-body">
-                    <!-- We want a for loop inside the empty control tags to iterate through each comment in comments -->
+                    <!--  a for loop inside the empty control tags to iterate through each comment in comments -->
                     {% for comment in comments %}
                     <div class="comments" style="padding: 10px;">
                         <p class="font-weight-bold">
-                            <!-- The commenter's name goes here. Check the model if you're not sure what that is -->
+                            <!-- The commenter's name goes here -->
                             {{ comment.name }}
                             <span class=" text-muted font-weight-normal">
                                 <!-- The comment's created date goes here -->
@@ -106,7 +107,7 @@
             </div>
             <div class="col-md-4 card mb-4  mt-3 ">
                 <div class="card-body">
-                    <!-- For later -->
+                    <!-- Comment has to be validated by admin -->
                     {% if commented %}
                     <div class="alert alert-success" role="alert">
                         Your comment is submitted for review

@@ -10,9 +10,11 @@
                             <div class="image-container">
                                 {% if "placeholder" in feat.featured_image.url %}
                                 <img class="card-img-top"
-                                    src="https://res.cloudinary.com/dklz0mnqm/image/upload/v1677325023/default_pjtpue.jpg">
+                                    src="https://res.cloudinary.com/dklz0mnqm/image/upload/v1677325023/default_pjtpue.jpg"
+                                    alt="default electronic workstation">
                                 {% else %}
-                                <img class="card-img-top" src=" {{ feat.featured_image.url }}">
+                                <img class="card-img-top" src=" {{ feat.featured_image.url }}"
+                                    alt="feature image of post">
                                 {% endif%}
                                 <div class="image-flash">
                                     <p class="author">{{ feat.category }} : {{ feat.author }}</p>
@@ -22,7 +24,7 @@
                                 <h2 class="card-title">{{ feat.board_name }}</h2>
                                 <p class="card-text">{{ feat.excerpt }}</p>
                             </a>
-                            <hr />
+                            <hr>
                             <p class="card-text text-muted h6">{{ feat.created_on | date:"D d M Y" }} |
                                 {{board.manufacturer }}
                                 <i class="far fa-heart"></i>{{ feat.number_of_likes }}

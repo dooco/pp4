@@ -12,7 +12,9 @@ password:
 The aim of this project is to demonstrate skills in developing a Full Stack Application using the Django framework accomplished through a blog syle application where a community of electronic hobbiests post their projects and comment on others.
 ## Introduction
 A hobby electronic and microprocessor development site where users can post articles and can add comments in order to build a community of developers sharing their creations. This blog style website can provide a platform for hobbyists to showcase their electronic and microprocessor projects and connect with other like-minded individuals. Users can post their projects along with detailed descriptions and images allowing other users to learn from and appreciate their work. Additionally, comments and likes can provide a means for users to share feedback, offer advice, and show their support for fellow hobbyists. This can lead to a vibrant community of makers, where users can learn from each other, collaborate on projects, and push the boundaries of hobby electronics and microprocessor development.
+
 ## User Stories
+
 [Issues](https://github.com/issues)
 ### Visitor
 1. As a visitor I can view a list of articles on home page so that I can pick out articles I am interested in to read.
@@ -23,6 +25,7 @@ A hobby electronic and microprocessor development site where users can post arti
 19. As a visitor I can search posts so that I can narrow my search with keywords used in my search selection.
 20. As a visitor I can view about page so that I can find out information on website.
 23. As a visitor I can visit website so that I can use features with ease and without needing knowledge on how to run in development mode.
+
 ### Registered User
 
 5. As a user I can log into account so that I can add, edit, view or delete my articles and view and comment on other articles.
@@ -33,7 +36,9 @@ A hobby electronic and microprocessor development site where users can post arti
 10. As a logged-in user I can comment on other user's articles so that I can give my opinion on that article.
 11. As a logged-in user I can click a like button below an other user's article so that I can show that I liked their article.
 18. As a logged in user I can log out so that other users can log in from my computer.
+
 ### Admin
+
 12. As an admin I can view, add, edit, delete posts on platform so that I can act as administrator of the platform.
 13. As an admin I can moderate articles and comments on the platform so that I can regulate content on site.
 14. As an admin I can edit, add or delete categories available on site so that I can keep site up to date.
@@ -52,7 +57,7 @@ A hobby electronic and microprocessor development site where users can post arti
 
 Main background colour: #F9FAFC
 light background background colour: #445261
-masthear text colour: #445261
+text colour: #445261
 card image flash colour: #23BBBB
 
 
@@ -64,12 +69,30 @@ Fonts used are google fonts:
 
 ![Google font Roboto](/static/images/readme/font-roboto.jpg)
 
-![Navbar](/static/images/readme/navbar-img.jpg)
+
 
 ### Imagery
-Hero image on index page is an image from:
+Hero image on index page is an image from iStock:
 
 ![hero](/static/images/readme/hero-img.jpg)
+
+Default image if user doesnt assign an image to post from pexels:
+
+![default post image](/static/images/readme/post-default-img.jpg)
+
+### Header and footer
+Header - sticky
+![Navbar](/static/images/readme/navbar-img.jpg)
+
+Footer
+
+![footer](/static/images/readme/footer.jpg)
+### Login / logout pages
+
+![Login](/static/images/readme/si)
+### Home page
+### Detail page
+
 
 ### The strategy plane
 Minimum requirements:
@@ -114,24 +137,28 @@ Only four models are used in this project:
 - Document the UX design work undertaken for this project, including any wireframes, mockups, diagrams, etc.,created as part of the design process and its reasoning. Include diagrams created as part of the design process and demonstrate that these have been followed through to implementation.
 
 ### Agile Planning
+
 Agile practice is an iterative approach to project management that encourages collaboration within the development team and with client. In this way, software development is achieved in small, incremental steps, with each step delivering a working piece of software that can be tested and appraised by client. Several stages, including planning, design, development, testing, and deployment are incorporated into the agile approach. At each stage, the team works closely with the client to ensure that the output meets their requirements.
 
-The project had 8 milestones. Milsestones were set up as headings to group user stories into and loosly have achievemnet goals that could be reached.
+The project had 8 milestones. Milsestones were set up as headings to group user stories into and to set achievemnet goals for the project.
+Project was managed in github's project area.
+[Link to project area](https://github.com/users/dooco/projects/6/views/1)
+
 #### Project initialisation
 - Install django, gunicorn, heroku, psycopg2, dj3-cloudinary-storage, summernote, dj-database-url, django-allauth, django-crispy-forms
 - Create env.py file to hold private information not to be pushed to github.
-- Create cloudinary account and bring over credentials to settings and env.py
-- Create account in elephantsql and use 'tiny turtle' plan and bring over credentials to heroku
-- Log into Heroku and create bew project, applying set-up variables and credentials from elephantsql.
+- Create cloudinary account and bring over credentials to settings and env.py.
+- Create account in elephantsql and use 'tiny turtle' plan and bring over credentials to heroku.
+- Log into Heroku and create new project, applying set-up variables and credentials from elephantsql.
 - Create Procfile file and apply gunicorn details. 
-- Setting up the database structure in settings.
+- Setting up the postgres database structure in settings.
 
 
 #### User accounts setup
-- Set up AllAuth
-- Set up social accounts google, facebook and github
-- Get credentials from applications API
-- Make use of Raymond Penners github user [login templates]https://github.com/pennersr/django-allauth
+- Set up AllAuth.
+- Set up social accounts google, facebook and github.
+- Get credentials from application's APIs.
+- Make use of Raymond Penners github user [login templates]https://github.com/pennersr/django-allauth.
 - Style login, logout and signup templates.
 - Creating the superuser login.
 
@@ -165,12 +192,34 @@ The project had 8 milestones. Milsestones were set up as headings to group user 
 - Add social allauth accounts to admin area.
 - Add credentials from social account providers.
 
-#### Test
-There are many ways of testing code, the most common are manual testing and automated testing. In order to complete manual testing, a list of all the features site has, the different types of input it can accept, and what are the expected outcomes. Each time there's a change to code, the test method needs to go through every item on that list and test it. Automated testing can be achieved by a script and  instead of manually going through each test a built in python test function itterates through the pre-programmed tests.
 
 
-[Manual User Experience Tests](https://res.cloudinary.com/dklz0mnqm/raw/upload/v1677482969/pp4-validation-excel_lxyanr.xlsx)
 #### Deploy to Heroku
+
+1. Login to the Heroku dashboard. Create a new app, choosing a name and location = Europe for your app.
+2. Login to elephantsql and copy ElephantSQL database URL using the Copy icon. It will start with 'postgres://'.
+3. In the heroku settings tab click on reveal config vars and add a Config Var called DATABASE_URL. Paste the DATABASE_URL copied from elephantsql into 
+and paste it into the env.py file in your project. Make sure that the env.py file is in the .gitignore file.
+
+4. Add a SECRET_KEY both to the env.py file and in the config vars on Heroku.
+
+5. In the Gitpod settings.py file, remove the insecure SECRET_KEY and replace it with the environment variable (SECRET_KEY) that was created.
+
+6. Replace existing DATABASES section in settings.py file with the DATABASE_URL environment variable that is located in the env.py file.
+
+7. Ensure that all static and files have been added to the settings.py file in Gitpod.
+
+8. Add the TEMPLATES_DIR to settings.py file in Gitpod and link it in the TEMPLATES section.
+
+Make sure that the project name for the Heroku app has been added as an allowed host in Gitpod.
+
+Ensure to create a Procfile and add web: gunicorn activities.wsgi to this file
+
+Make sure that the DEBUG flag is set to DEBUG = 'DEVELOPMENT' in os.environ in settings.py file in Gitpod
+
+Add STRIPE_PUBLIC_KEY, STRIPE_SECRET_KEY, STRIPE_WH_SECRET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and USE_AWS to config vars on Heroku
+
+Make sure that all dependencies have been added to the requirements.txt file using the command pip3 freeze
 
  
 
@@ -215,33 +264,86 @@ There are many ways of testing code, the most common are manual testing and auto
 - [Favicon.io](https://favicon.io/) : Favicon generator 
 - [Font Awesome](https://fontawesome.com/) :  Icon library and toolkit.
 - [Lucidchart](https://www.lucidchart.com/) : To create flowcharts & diagrams online.
+- [CI Python Linter](https://pep8ci.herokuapp.com/) 
+- [W3C HTML validation](https://validator.w3.org/nu/)
+- [W3C CSS validation](https://jigsaw.w3.org/css-validator/)
 
 
 --------
 
 ## Testing
 
+### Django Testing Capabilities
+Django provides a testing framework that makes it easy to write automated tests for applications. The testing framework allows developers to write tests for views, models, forms, and other components of the application.
 
+### Limitations
+Django has certain limitations when it comes to testing. One limitation is that the testing framework does not provide support for testing JavaScript, HTML and CSS. Testing complex database queries can be challenging as it requires creating test data and verifying the results. 
+
+### Unit Tests
+Unit tests are automated tests that are used to test individual components of an application and are written using the built-in testing framework. Unit tests are essential for detecting errors and ensuring that individual components of the application are functioning correctly. In this project eight unit tests were created to test views and form functionality. All tests passed except one which rewuires further investigation. All the tests are included in the test_views.py and test_forms.py files. A screenshot of the result is shown below.
 
 ![Python test.py](/static/images/readme/test-result.jpg)
 
+### Manual Tests
+Manual tests are tests that are performed by a human to verify the functionality of the application. Manual tests can be used to test user interfaces, accessibility, and usability. While manual tests are essential, they are time-consuming and are prone to human error, making them less reliable than automated tests.
+In order to complete manual testing, a list of all the features the site has, the different types of input it can accept, and what are the expected outcomes. Each time there's a change to code, the test method needs to go through every item on that list and test it. Below is a link to a spreadsheet with user experience tests, expected outcomes and results to test the site's user functionality.
+
+
+[Manual User Experience Tests](https://res.cloudinary.com/dklz0mnqm/raw/upload/v1677482969/pp4-validation-excel_lxyanr.xlsx)
+
+### PEP8
+PEP8 is a set of coding conventions for Python code that ensures consistency and readability. When writing tests in Django, it's essential to adhere to PEP8 standards. Writing tests that follow PEP8 guidelines makes the code easier to read and maintain. The PEP8 tool used for validating python code in this project was the [CI Python Linter](https://pep8ci.herokuapp.com/) and below are screen shots of the  main files validated with this tool (only warnings indicating line length longer than 80 characters are present).
+
+[settings.py](/static/images/readme/settings-lin.jpg)
+
+[pp4 urls.py](/static/images/readme/pp4-url-lin.jpg)
+
+[models.py](/static/images/readme/models-lin.jpg)
+
+[views.py](/static/images/readme/views-lin.jpg)
+
+[joinus urls.py](/static/images/readme/joinus-urls-lin.jpg)
+
+[forms.py](/static/images/readme/forms-lin.jpg)
+
+[test_views.py](/static/images/readme/test-views-lin.jpg)
+
+[test_forms.py](/static/images/readme/test-forms-lin.jpg)
+
+### HTML Validation
+
+
+It is important to validate both HTML and CSS code to ensure readability and consistancy. Online software package  W3C HTML validator checks code to World Wide Web Consortium (W3C) standard. Below are samples of code tested using these tools.
+
+
 ![HTML validation](/static/images/readme/w3c-html.jpg)
 
+### CSS validation
+
 ![CSS validation](/static/images/readme/w3c-css-img.jpg)
+
+### JavaScript validation
+
+As there are only a few scripts embedded in the html code a visual check on validation of code was deemed to be appropriate and no validation issues were observed.
+
+### Lighthouse Accessibility
+
+### Known Bugs
+
+### Bugs Fixed
+
+
 ### Create Repository
 
-
-
-#### To create a new repository:
-
--  Log in to GitHub.
--  Click on 'repositories'.
--  Click on 'new' button, which create a new repository.
--  Select CodeInstitute template from the dropdown menu. 
--  Name project by adding title, 'PP4'.
--  Select 'Add Read.Me'.
--  Click 'create repository'.
--  Open repository and click green 'GitPod' button to create workspace.
+- Log in to GitHub.
+- Click on 'repositories'.
+- Click on 'new' button, which create a new repository.
+- Click on 'No Template' button.
+- Select 'Code-Institute-Org/gitpod-full-template-dev' template from the dropdown menu. 
+- Name project by adding title, 'PP4'.
+- Select 'Add Read.Me' by clickiing box.
+- Click 'create repository'.
+- Open repository and click green 'GitPod' button to create workspace.
 
 #### Install Django 
 
@@ -251,15 +353,17 @@ There are many ways of testing code, the most common are manual testing and auto
 - Add app to installed settings: INSTALLED_APPS = [ ... 'django.contrib.staticfiles', 'joinus',]
 - Migrate: python3 manage.py migrate
 - Run http server to confirm installation was successful: python3 mange.py runserver
+
 #### Install libraries
 - Install Cloudinary: pip3 install cloudinary
+- Install Summernote: pip3 install django-summernote
 
-- Create requirements
+- Create requirements: pip3 freeze --local > requirements.txt
 
 Connect to Heroku and ElephantSQL
 - Create Heroku App
 - Create new instance on Elephant SQL and copy DB url
-- Create env.py, adding the secret key. Ensure env.py is in gitignore
+- Create env.py, adding the secret key. Ensure env.py is in .gitignore
 - Import env.py into Settings, and edit secret key accordingly
 - Comment out original databases in Settings
 - Connect to ElephantSQL
@@ -284,6 +388,12 @@ Set up Directories and deploy
 #### Final deployment
 
 - In settings, 
-    - Set DEBUG to False. If this is not done, cloudinary images won't be served and traceback error messages will be shown to the user (which can also reveal credentials that can benefit hackers).
-- Update Heroku configuration settings. Remove CollectStatic.
+    - Set DEBUG to False. 
+
+    - Set X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+    - Update Heroku configuration settings. Remove COLLECTSTATIC.
+
+If this is not done, on error, traceback error messages will be shown to the user (revealing credentials and other secure information).
+
     
