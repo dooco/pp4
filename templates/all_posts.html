@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Post Delete {% endblock %}
+{% block content %}
+<div class="container d-flex flex-column min-vh-100">
+     <!-- Hero -->
+     <div class="p-5 text-center bg-image rounded-3">
+        <img src="https://res.cloudinary.com/dklz0mnqm/image/upload/v1677324476/hero-img-h300_gp0lhp.jpg"
+            class="img-fluid" alt="electronic hobbiest image">
+    </div>
+    <!-- Hero -->
+    <div class="row mt-5">
+        {% for post in posts %}
+        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+            <div class="card h-100 border-0">
+                {% if post.featured_image %}
+                <a href="{% url 'board_detail' post.slug %}">
+                    <img class="card-img-top img-fluid" src="{{ post.featured_image.url }}" alt="{{ post.board_name }}">
+                </a>
+                {% else %}
+                <a href="{% url 'board_detail' post.slug %}">
+                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ post.board_name }}">
+                </a>
+                {% endif %}
+                <div class="card-body pb-0">
+                    <p class="mb-0"><strong>{{ post.board_name }}</strong></p>
+                </div>
+                <div class="card-footer bg-white pt-0 border-0 text-left">
+                    <div class="row">
+                        <div class="col">
+         
+                            {% if post.category %}
+                            <p class="small mt-1 mb-0">
+                                    <i class="fas fa-tag mr-1"></i> {{ post.category }}
+                            </p>
+                            {% endif %}
+                            {% if post.author %}
+                            <p class="small mt-1 mb-0">
+                                    <i class="fas fa-store mr-1"></i>{{ post.author }}
+                            </p>
+                            {% endif %}
+                            {% if request.user == post.author %}
+                            <small class="ml-3">
+                                <a href="{% url 'post_edit' post.slug %}">Edit</a> | 
+                                <a class="text-danger" href="{% url 'post_delete' post.slug %}">Delete</a>
+                            </small>
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if forloop.counter|divisibleby:1 %}
+            <div class="col-12 d-sm-none mb-5">
+                <hr>
+            </div>
+        {% endif %}                        
+        {% if forloop.counter|divisibleby:2 %}
+            <div class="col-12 d-none d-sm-block d-md-block d-lg-none mb-5">
+                <hr>
+            </div>
+        {% endif %}
+        {% if forloop.counter|divisibleby:3 %}
+            <div class="col-12 d-none d-lg-block d-xl-none mb-5">
+                <hr>
+            </div>
+        {% endif %}
+        {% if forloop.counter|divisibleby:4 %}
+            <div class="col-12 d-none d-xl-block mb-5">
+                <hr>
+            </div>
+        {% endif %}
+    {% endfor %}
+    </div>
+    <div class="row justify-content-center mt-5">
+    </div>
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link btn-signup">&laquo; PREV </a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link btn-signup"> NEXT &raquo;</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+{% endblock content %}

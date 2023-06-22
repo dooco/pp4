@@ -7,18 +7,6 @@
     <div class="container">
         <div class="row g-0">
             <div class="col-md-6">
-                <!-- check if user is both authenticated and is the author of post -->
-                <h2 class="post-title">{{ board.board_name }} | <a href="{% url 'post_new' board.slug %}"
-                        class="post-title"><i
-                            class="fas fa-plus text-muted"></i></a>{% if user.is_authenticated and user == board.author %}
-                    <a href="{% url 'post_edit' board.slug %}" class="post-title"><i
-                            class="far fa-edit text-muted"></i></a>
-                    <a href="{% url 'post_delete' board.slug %}" class="post-title"><i
-                            class="fas fa-trash text-muted"></i></a>
-
-                    <!-- the endif goes here -->
-                    {% endif %}
-                </h2>
                 <div class="card-text">{{ board.author }} | {{ board.created_on | date:"D d M Y" }} |
                     {{ board.manufacturer }} | {{board.category}}
                 </div>

@@ -6,16 +6,23 @@ from django.template.defaultfilters import slugify
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from .models import BoardFeature, Review, Category
 from .forms import ReviewForm, PostForm
 
 
-class BoardFeatureList(ListView):
-    model = BoardFeature
-    queryset = BoardFeature.objects.filter(status=1).order_by('-created_on')
-    template_name = 'index.html'
-    paginate_by = 6
+def all_posts(request):
+    """ A view to show all posts """
+    
+    category = request.GET.get('category')
+    posts = BoardFeature.objects.all()
+    if category:
+        posts = posts.filter(category__slug=category)
+    context = {
+        'posts': posts,
+    }
+    return render(request, 'all_posts.html', context)
 
 
 class BoardDetail(DetailView):
@@ -86,16 +93,7 @@ class BoardLike(DetailView):
         return HttpResponseRedirect(reverse('board_detail', args=[slug]))
 
 
-def category_detail(request, slug):
-    category = get_object_or_404(Category, slug=slug)
-    feature = category.feature.filter(status=1)
-    return render(request, 'category_detail.html', {
-        'category': category,
-        'feature': feature,
-    })
-
-
-class CategoryDetail(DetailView):
+# class CategoryDetail(DetailView):
     def get(self, request, slug, *args, **kwargs):
         queryset = BoardFeature.objects.filter(status=1)
         detail = get_object_or_404(queryset, slug=slug)
@@ -157,21 +155,23 @@ def feature_detail(request, category_slug, slug):
     })
 
 
-class PostCreate(LoginRequiredMixin, CreateView):
+class PostCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = BoardFeature
-    fields = ['board_name', 'category', 'manufacturer', 'special_features', 'excerpt', 'featured_image', ]
+    form_class = PostForm
     template_name = 'post_new.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('all_posts')
+    success_message = "Your article has been saved. It will be published when Admin review."
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super(PostCreate, self).form_valid(form)
 
 
-class PostUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class PostUpdate(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     model = BoardFeature
     template_name = 'post_edit.html'
     fields = ['board_name', 'category', 'manufacturer', 'special_features', 'excerpt', 'featured_image', ]
+    success_message = "Your article has been updated."
 
     def get_success_url(self):
         slug = self.kwargs['slug']
@@ -182,10 +182,12 @@ class PostUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return self.request.user == post.author
 
 
-class PostDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class PostDelete(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
     model = BoardFeature
     template_name = 'post_delete.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('all_posts')
+    success_message = "Your article has been deleted."
+    
 
     def test_func(self):
         post = self.get_object()

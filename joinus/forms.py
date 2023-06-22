@@ -8,7 +8,8 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = BoardFeature
-        fields = ['board_name', 'category', 'manufacturer', 'special_features', 'excerpt', 'featured_image']
+        fields = ['board_name', 'category', 'manufacturer', 'special_features', 'excerpt', 'featured_image',]
+        # featured_image = forms.ImageField(label='Featured Image', required=True,)
 
 
 class ReviewForm(forms.ModelForm):

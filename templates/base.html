@@ -1,5 +1,5 @@
 {% load static %}
-{% load menu %}
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -27,7 +27,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <div class="container-fluid">
                 <!-- logo -->
-                <a class="navbar-brand" href="{% url 'home' %}"><span class="brand">D</span><span
+                <a class="navbar-brand" href="{% url 'all_posts' %}"><span class="brand">D</span><span
                         class="red-o">ev</span>elop<span class="red-o">er</span> B<span class="red-o">oa</span>rd
                     R<span class="red-o">evi</span>ew</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -36,30 +36,38 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                        <li class="nav-item list-inline-item dropdown">
+                            <a class="text-black nav-link user-options" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="text-center">
+                                    <div><i class="fas fa-user fa-lg"></i></div>
+                                    <p class="my-0">My Account</p>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu border-0" aria-labelledby="user-options">
+                                {% if request.user.is_authenticated %}
+                                    <a href="{% url 'post_new' %}" class="dropdown-item">Add Article</a>
+                                    <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                                {% else %}
+                                    <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+                                    <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+                                {% endif %}
+                            </div>
                         </li>
-                        <!-- if user is authenticated offer logout option -->
-                        {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'account_logout' %}"> {{ user.username }} Logout</a>
-                        </li>
-                        {% else %}
-                        <li class="nav-item">
-                            <!-- if not authenticated then offer register or login -->
-                            <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'account_login' %}">Login</a>
-                        </li>
-                        {% endif %}
 
                     </ul>
                 </div>
                 <!-- menu of categories -->
                 <div class="row">
                     <div class="navbar-text text-muted">
-                        <div class="d-flex flex-nowrap">{% menu %}</div>
+                        <div class="d-flex flex-nowrap">
+                            <a href="{% url 'all_posts' %}?category=robotics" class="nav-link me-auto">Robotics</a>
+                            <a href="{% url 'all_posts' %}?category=computers" class="nav-link me-auto mx-2">Computers</a>
+                            <a href="{% url 'all_posts' %}?category=security" class="nav-link me-auto mx-2">Security</a>
+                            <a href="{% url 'all_posts' %}?category=iot" class="nav-link me-auto mx-2">IOT</a>
+                            <a href="{% url 'all_posts' %}?category=drone" class="nav-link me-auto mx-2">Drone</a>
+                            <a href="{% url 'all_posts' %}?category=power" class="nav-link me-auto mx-2">Power</a>
+                            <a href="{% url 'all_posts' %}?category=industrial" class="nav-link me-auto mx-2">Industrial</a>
+                        </div>
                     </div>
                 </div>
             </div>
