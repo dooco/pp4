@@ -1,3 +1,7 @@
+"""
+URLS for joinus
+"""
+
 from importlib import import_module
 
 from django.urls import include, path
@@ -11,7 +15,6 @@ from . import views
 
 
 urlpatterns = [
-    # path('', views.BoardFeatureList.as_view(), name='home'),
     path('', views.all_posts, name='all_posts'),
     path('admin/', admin.site.urls),
     # path('<slug:slug>/', views.category_detail, name='category_detail'),
