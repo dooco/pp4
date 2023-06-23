@@ -60,6 +60,7 @@ light background background colour: #445261
 text colour: #445261
 card image flash colour: #23BBBB
 
+The background and text colours were selected to give a good contrast as most of the blogs contain a good amount of text. The card background colour was chosen for to make the card stand out slightly against the main background of the site.
 
 ### Fonts
 Fonts used are google fonts:
@@ -69,7 +70,7 @@ Fonts used are google fonts:
 
 ![Google font Roboto](/static/images/readme/font-roboto.jpg)
 
-
+These fonts were chosen as they are easy to read and work well together.
 
 ### Imagery
 Hero image on index page is an image from iStock:
