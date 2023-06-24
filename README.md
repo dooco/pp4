@@ -153,15 +153,6 @@ The project had 8 milestones. Milsestones were set up as headings to group user 
 Project was managed in github's project area.
 [Link to project area](https://github.com/users/dooco/projects/6/views/1)
 
-#### Project initialisation
-- Install django, gunicorn, heroku, psycopg2, dj3-cloudinary-storage, summernote, dj-database-url, django-allauth, django-crispy-forms
-- Create env.py file to hold private information not to be pushed to github.
-- Create cloudinary account and bring over credentials to settings and env.py.
-- Create account in elephantsql and use 'tiny turtle' plan and bring over credentials to heroku.
-- Log into Heroku and create new project, applying set-up variables and credentials from elephantsql.
-- Create Procfile file and apply gunicorn details. 
-- Setting up the postgres database structure in settings.
-
 
 #### User accounts setup
 - Set up AllAuth.
@@ -342,7 +333,7 @@ As there are only a few scripts embedded in the html code a visual check on vali
 - When running the html checker some of my divs were not completed, so I fixed them.
 - The javascript scripts are included in script html tag the base.html file. Best practice would be to include it in static/js folder and only include in the files where they are needed.
 
-
+## Initialising Project
 
 ### Create Repository
 
@@ -368,40 +359,141 @@ As there are only a few scripts embedded in the html code a visual check on vali
 #### Install libraries
 - Install Cloudinary: pip3 install cloudinary
 - Install Summernote: pip3 install django-summernote
+- Making sure you are at root level create file: requirements.txt
+- Add to requirements: pip3 freeze --local > requirements.txt
 
-- Create requirements: pip3 freeze --local > requirements.txt
-
-Connect to Heroku and ElephantSQL
-- Create Heroku App
-- Create new instance on Elephant SQL and copy DB url
-- Create env.py, adding the secret key. Ensure env.py is in .gitignore
-- Import env.py into Settings, and edit secret key accordingly
-- Comment out original databases in Settings
-- Connect to ElephantSQL
-- Make migrations
-- Test connect to ElephantSQL was successful
-- Add config vars to Heroku
-
-Connect to Cloudinary
+Connect to your cloudinary account
 - Add Cloudinary API environment variable to env.py
-- Add Cloudinary API environment variable to Heroku Config Vars
-- Add DISABLE_COLLECTSTATIC to Heroku config vars
-- In Settings,  "Installed Apps", add cloudinary_storage and cloudinary
+- Add Cloudinary API environment variable to Heroku Config Vars (at deploy stage)
+- In Settings,  "Installed Apps", add 'cloudinary_storage' and 'cloudinary'
 
-Set up Directories and deploy
-- In Settings, under STATIC_URL add STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage', and add STATICFILES_DIRS, STATIC_ROOT, MEDIA_URL, DEFAULT_FILE_STORAGE
+Set up Directories
+- In Settings, under STATIC_URL add STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage', 
+- and add STATICFILES_DIRS, STATIC_ROOT, MEDIA_URL, DEFAULT_FILE_STORAGE
 - Add Templates Directory under BASE_DIR in settings, and fill in brackets for "DIR": []
-- Add Heroku host name to ALLOWED_HOSTS
-- Add top level directories
-- Add a procfile
-- In Heroku, link to GitHub as the deployment method
-
-#### Final deployment
-
-- In settings, 
-- Set DEBUG to False. 
 - Set X_FRAME_OPTIONS = 'SAMEORIGIN'
-- Update Heroku configuration settings. Remove COLLECTSTATIC.
+
+
+### Deployment
+
+#### Database setup stage:
+  - Log onto elephantSQL, click on 'Create new instance' Name your instance: e.g. 'pp4database', choose Tiny Turtle plan and choose region: eu-west-1, click 'Review' and then 'Create instance', copy URL for use in Heroku.
+  - Log onto heroku, click on 'New' then 'Create new app'. Name it 'pp4' and choose a region: 'Europe', go to settings tab and click on 'Reveal Config Vars', create a new config variable of DATABASE_URL and paste the database URL you copied from elephantSQL into the value, it should not have quotation marks around it.
+  - Set new variable DISABLE_COLLECTSTATIC to 1 to prevent Heroku from loading static files.
+  - Under 'Deploy' in Heroku select deploy from github and below search for your repo in github, and connect. Select enable auto deploys.
+   
+#### Back up your current sqlite database
+  - Use datadump to preserve all data in development database 
+  - Backup the current database and load it into a data.json file, by typing in CLI:
+    ```python3 manage.py dumpdata  > data.json```
+  - This data can be uploaded when deployed database is functioning.
+
+#### In Gitpod/local environment
+
+  - Install dj_database_url and psycopg2:
+```pip3 install dj_database_url```
+```pip3 install psycopg2```
+
+  
+  - update requirements.txt:
+```pip3 freeze > requirements.txt```
+  - In settings.py just after import os add:
+```import dj_database_url```
+  - Comment out for the moment:
+```DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+```
+
+  - Paste the following above the commented:
+```DATABASES = {
+    'default': dj_database_url.parse("<paste-elephantsql-db-url-here>")
+```
+}
+#### Re-load your database
+  - Load your data from the data.json file into postgres by typing in the CLI: ```python3 manage.py loaddata data.json``` 
+  - Migrate the database by entering: ```python3 manage.py migrate```
+  - Create superuser: ```python3 manage.py createsuperuser``` 
+  - Follow instructions and set user-name to admin and your prefered password.
+
+  - Install gunicorn using command: ```pip3 install gunicorn```
+  - Update requirement.txt by typing command in cli: ```pip3 freeze > requirements.txt```
+  - Create a Procfile in the root directory which tells Heroku to create a web dyno which runs gunicorn and serves our django app. Add the following to the file (do not leave any blank lines underneath):
+
+      ```web: gunicorn pp4.wsgi:application```
+         	 
+#### Change configuration to allow for production and development mode
+  - Secret Key: ```SECRET_KEY = os.environ.get('SECRET_KEY', '')```
+  - Debug: ```DEBUG = 'DEVELOPMENT' in os.environ``` so that debug is true in your development environment, but false in production
+  - Allowed Hosts: ```ALLOWED_HOSTS = ['dooco-pp4.herokuapp.com', 'localhost']``` 
+
+  - Replace commented out database details with an if statement in settings.py, the app will be connected to Postgres in production mode and SQlite when in development.
+    ```
+      if 'DATABASE_URL' in os.environ:
+          DATABASES = {
+            'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+          }
+      else:
+          DATABASES = {
+              'default': {
+                  'ENGINE': 'django.db.backends.sqlite3',
+              'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+              }
+          }
+    ```
+  - Update email settings so that emails are sent in production and display in the console when in development environment:
+    ```
+    if 'DEVELOPMENT' in os.environ:
+      EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+      DEFAULT_FROM_EMAIL = 'pp4@example.com'
+    else:
+      EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+      EMAIL_USE_TLS = True
+      EMAIL_PORT = 587
+      EMAIL_HOST = 'smtp.gmail.com'
+      EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+      EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
+      DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_USER')
+    ```
+  - Using git add, commit and push changes to github
+  - If you have auto deployment set up in Heroku you can see site deployed (without static files) by clicking on 'OPEN APP' on top right.
+
+### **Local Deploy**
+  
+  To use this project, you can either fork or clone the local repository on gitHub as follows, then go to the deployment section to configure and deploy the app on Heroku.
+    
+#### **Forking repository for local use**
+
+  You can make a copy of the GitHub Repository by "forking" the original repository onto your own account, where changes can be made without affecting the original repository by taking the following steps:
+  - Log onto Github
+  - Navigate to the GitHub repository : https://github.com/dooco/pp4
+  - Click on the fork icon (located on top right of the page, same level of repository name).
+  - A copy of this repository should appear in your GitHub account.
+  - To make changes, clone the file into your local IDE.
+  - pip3 install -r requiremants.txt
+  - make sure you are in root directory by typing `ls` and acknowledging that manage.py is in same directory. 
+      
+    
+#### **Cloning the repository into your local IDE**
+  - Create an empty directory: ```mkdir dir_name```
+  - Change directory: ```cd dir_name```
+  - On GitHub  navigate to the GitHub repository: https://github.com/dooco/edwinaz
+  - Above repository folder and files click on “Code”
+  - Copy the url
+  - Create a repository in own GitHub
+  - In terminal and in the directory just created type: ```$ git clone https://github.com/dooco/edwinaz.git```
+     All the files will have been imported in your workspace
+  - type `ls` to see files and cd to root where manage.py is located.
+	
+
+
+#### **Install python dependencies**
+- To install all the Python dependencies dependencies needed for this project using the requirements.txt file, type the following command in the CLI:
+- ```$pip3 install -r requirements.txt```
+
 
 If this is not done, on error, traceback error messages will be shown to the user (revealing credentials and other secure information).
 ## Credits and Acknowledgements
