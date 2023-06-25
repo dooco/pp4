@@ -9,13 +9,13 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = BoardFeature
         fields = ['board_name', 'category', 'manufacturer', 'special_features', 'excerpt', 'featured_image',]
-        # featured_image = forms.ImageField(label='Featured Image', required=True,)
+
 
 
 class ReviewForm(forms.ModelForm):
 
-    # def __init__(self, *args, **kwargs):
-    #     super(PostCreate, self).__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super(ReviewForm, self).__init__(*args, **kwargs)
 
     class Meta:
         model = Review

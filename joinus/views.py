@@ -28,41 +28,41 @@ def all_posts(request):
     return render(request, 'all_posts.html', context)
 
 
-    def post(self, request, slug, *args, **kwargs):
-        """
-        A function to handle likes and commenting on articles
-        """
+def post(self, request, slug, *args, **kwargs):
+    """
+    A function to handle likes and commenting on articles
+    """
 
-        queryset = BoardFeature.objects.filter(status=1)
-        board = BoardFeature.objects.get(slug=slug)
-        detail = get_object_or_404(queryset, slug=slug)
-        liked = False
-        if detail.likes.filter(id=self.request.user.id).exists():
-            liked = True
-        form = ReviewForm(request.POST)
+    queryset = BoardFeature.objects.filter(status=1)
+    board = BoardFeature.objects.get(slug=slug)
+    detail = get_object_or_404(queryset, slug=slug)
+    liked = False
+    if detail.likes.filter(id=self.request.user.id).exists():
+        liked = True
+    form = ReviewForm(request.POST)
 
-        if form.is_valid():
-            new_review = form.save(commit=False)
-            new_review.name = request.user
-            new_review.board = board
-            new_review.save()
-            messages.success(
-                request, "Thank you, your review has been sent.")
-        else:
-            form = ReviewForm()
+    if form.is_valid():
+        new_review = form.save(commit=False)
+        new_review.name = request.user
+        new_review.board = board
+        new_review.save()
+        messages.success(
+            request, "Thank you, your review has been sent.")
+    else:
+        form = ReviewForm()
 
-        comments = Review.objects.filter(board=board).order_by('-created_on')
-        return render(
-            request,
-            "board_detail.html",
-            {
-                "board": board,
-                "comments": comments,
-                "commented": True,
-                "liked": liked,
-                "form": form,
-            },
-        )
+    comments = Review.objects.filter(board=board).order_by('-created_on')
+    return render(
+        request,
+        "board_detail.html",
+        {
+            "board": board,
+            "comments": comments,
+            "commented": True,
+            "liked": liked,
+            "form": form,
+        },
+    )
 
 
 class BoardDetail(DetailView):
