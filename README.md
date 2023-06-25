@@ -197,11 +197,12 @@ Project was managed in github's project area.
 #### Deploy to Heroku
 
 1. Login to the Heroku dashboard. Create a new app, choosing a name and location = Europe for your app.
-2. Login to elephantsql and copy ElephantSQL database URL using the Copy icon. It will start with 'postgres://'.
-3. In the heroku settings tab click on reveal config vars and add a Config Var called DATABASE_URL. Paste the DATABASE_URL copied from elephantsql into 
-and paste it into the env.py file in your project. Make sure that the env.py file is in the .gitignore file.
 
-4. Add a SECRET_KEY both to the env.py file and in the config vars on Heroku.
+2. Login to elephantsql and copy ElephantSQL database URL using the Copy icon. It will start with 'postgres://'.
+
+3. In the heroku settings tab click on reveal config vars and add a Config Var called DATABASE_URL. Paste the DATABASE_URL copied from elephantsql and paste it into the env.py file in your project. Make sure that the env.py file is in the .gitignore file.
+
+4. Add a django SECRET_KEY both to the env.py file and in the config vars on Heroku.
 
 5. In the settings.py file, replace insecure SECRET_KEY with the environment variable (SECRET_KEY) that was created.
 
@@ -480,11 +481,11 @@ Set up Directories
 #### **Cloning the repository into your local IDE**
   - Create an empty directory: ```mkdir dir_name```
   - Change directory: ```cd dir_name```
-  - On GitHub  navigate to the GitHub repository: https://github.com/dooco/edwinaz
+  - On GitHub  navigate to the GitHub repository: https://github.com/dooco/pp4
   - Above repository folder and files click on “Code”
   - Copy the url
   - Create a repository in own GitHub
-  - In terminal and in the directory just created type: ```$ git clone https://github.com/dooco/edwinaz.git```
+  - In terminal and in the directory just created type: ```$ git clone https://github.com/dooco/pp4.git```
      All the files will have been imported in your workspace
   - type `ls` to see files and cd to root where manage.py is located.
 	
@@ -492,13 +493,12 @@ Set up Directories
 
 #### **Install python dependencies**
 - To install all the Python dependencies dependencies needed for this project using the requirements.txt file, type the following command in the CLI:
-- ```$pip3 install -r requirements.txt```
+- ```$pip3 install -r requirements.txt``` 
 
 
-If this is not done, on error, traceback error messages will be shown to the user (revealing credentials and other secure information).
 ## Credits and Acknowledgements
 - A major thanks to my mentor, Ronan McClelland, was as always there to guide me through the project and provide encouragement.
-- Thanks to all Code Institute's mentors that assisted in coding.
+- Thanks to all Code Institute's tutors that assisted in coding.
 - Django documentation on all aspects of django settings.
 - W3Schools with coding issues.
 - Stack overflow with all sorts of answers.
