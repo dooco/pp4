@@ -35,6 +35,12 @@
                         {{ board.special_features | safe }}
                     </div>
                     {% endif %}
+                    {% if request.user == board.author %}
+                            <small class="ml-3">
+                                <a href="{% url 'post_edit' board.slug %}">Edit</a> | 
+                                <a class="text-danger" href="{% url 'post_delete' board.slug %}">Delete</a>
+                            </small>
+                        {% endif %}
                     <div class="row">
                         <div class="col-1">
                             <strong>
