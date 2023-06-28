@@ -34,7 +34,10 @@ DEBUG = 'DEVELOPMENT' in os.environ
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 ALLOWED_HOSTS = ['dooco-pp4.herokuapp.com', 'localhost', '127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'https://dooco-pp4.herokuapp.com/', 'https://8000-dooco-pp4-cn40sqc1a56.ws-eu88.gitpod.io']
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:8000',
+    'https://dooco-pp4.herokuapp.com/',
+    'https://8000-dooco-pp4-cn40sqc1a56.ws-eu88.gitpod.io']
 
 # Application definition
 
@@ -120,7 +123,6 @@ else:
     }
 
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -170,12 +172,12 @@ SUMMERNOTE_THEME = 'bs4'
 
 
 MESSAGE_TAGS = {
-        messages.DEBUG: 'alert-info',
-        messages.INFO: 'alert-info',
-        messages.SUCCESS: 'alert-success',
-        messages.WARNING: 'alert-warning',
-        messages.ERROR: 'alert-danger',
-    }
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
 
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -236,7 +238,6 @@ ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4
-
 
 
 if 'DEVELOPMENT' in os.environ:
