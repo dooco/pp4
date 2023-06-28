@@ -14,10 +14,10 @@ from .forms import ReviewForm, PostForm
 
 def all_posts(request):
     """
-    A view to show all posts 
+    A view to show all posts
     and display filtered category posts
     """
-    
+
     category = request.GET.get('category')
     posts = BoardFeature.objects.all()
     if category:
@@ -69,6 +69,7 @@ class BoardDetail(DetailView):
     """
     A view to handle detail view of article
     """
+
     def get(self, request, slug, *args, **kwargs):
 
         queryset = BoardFeature.objects.filter(status=1)
@@ -126,11 +127,11 @@ class BoardDetail(DetailView):
         )
 
 
-
 class BoardLike(DetailView):
     """
     A view to handle likes
     """
+
     def post(self, request, slug, *args, **kwargs):
         post = get_object_or_404(BoardFeature, slug=slug)
         if post.likes.filter(id=request.user.id).exists():
@@ -144,10 +145,12 @@ class CategoryDetail(DetailView):
     """
     A view to handle category detail dispaly
     """
+
     def get(self, request, slug, *args, **kwargs):
         queryset = BoardFeature.objects.filter(status=1)
         detail = get_object_or_404(queryset, slug=slug)
-        comments = detail.comments.filter(approved=True).order_by('-created_on')
+        comments = detail.comments.filter(
+            approved=True).order_by('-created_on')
         liked = False
         if detail.likes.filter(id=self.request.user.id).exists():
             liked = True
@@ -166,7 +169,8 @@ class CategoryDetail(DetailView):
     def post(self, request, slug, *args, **kwargs):
         queryset = BoardFeature.objects.filter(status=1)
         detail = get_object_or_404(queryset, slug=slug)
-        comments = detail.comments.filter(approved=True).order_by('-created_on')
+        comments = detail.comments.filter(
+            approved=True).order_by('-created_on')
         liked = False
         if detail.likes.filter(id=self.request.user.id).exists():
             liked = True
@@ -223,13 +227,24 @@ class PostCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return super(PostCreate, self).form_valid(form)
 
 
-class PostUpdate(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
+class PostUpdate(
+        LoginRequiredMixin,
+        UserPassesTestMixin,
+        SuccessMessageMixin,
+        UpdateView):
     """
     A view to edit an article
     """
     model = BoardFeature
     template_name = 'post_edit.html'
-    fields = ['board_name', 'category', 'manufacturer', 'special_features', 'excerpt', 'featured_image', ]
+    fields = [
+        'board_name',
+        'category',
+        'manufacturer',
+        'special_features',
+        'excerpt',
+        'featured_image',
+    ]
     success_message = "Your article has been updated."
 
     def get_success_url(self):
@@ -241,15 +256,18 @@ class PostUpdate(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, U
         return self.request.user == post.author
 
 
-class PostDelete(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
-    """ 
+class PostDelete(
+        LoginRequiredMixin,
+        UserPassesTestMixin,
+        SuccessMessageMixin,
+        DeleteView):
+    """
     A view to delete an article
     """
     model = BoardFeature
     template_name = 'post_delete.html'
     success_url = reverse_lazy('all_posts')
     success_message = "Your article has been deleted."
-    
 
     def test_func(self):
         post = self.get_object()

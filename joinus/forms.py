@@ -1,5 +1,6 @@
 from .models import Review, BoardFeature
 from django import forms
+from django_summernote.widgets import SummernoteWidget
 
 
 class PostForm(forms.ModelForm):
@@ -8,8 +9,15 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = BoardFeature
-        fields = ['board_name', 'category', 'manufacturer', 'special_features', 'excerpt', 'featured_image',]
-
+        fields = [
+            'board_name',
+            'category',
+            'manufacturer',
+            'special_features',
+            'excerpt',
+            'featured_image',
+        ]
+        widgets = {'special_features': SummernoteWidget()}
 
 
 class ReviewForm(forms.ModelForm):

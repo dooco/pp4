@@ -3,6 +3,7 @@ from django.conf import settings
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from django.core.exceptions import ValidationError
 
 STATUS = ((0, "Draft"), (1, "Published"))
 
@@ -42,7 +43,7 @@ class BoardFeature(models.Model):
     def __str__(self):
         return self.board_name
 
-    def save(self, *args, **kwargs): 
+    def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.board_name)
         return super().save(*args, **kwargs)
@@ -52,6 +53,11 @@ class BoardFeature(models.Model):
 
     def get_absolute_url(self):
         return reverse('post_edit', kwargs={'pk': self.pk})
+
+    def clean(self):
+        super().clean()
+        if len(self.excerpt) > 255:
+            raise ValidationError("Excerpt must be 255 characters or less.")
 
 
 class Review(models.Model):

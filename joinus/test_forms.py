@@ -17,4 +17,6 @@ class TestPostForm(TestCase):
         form = PostForm({'board_name': ''})
         self.assertFalse(form.is_valid())
         self.assertIn('board_name', form.errors.keys())
-        self.assertEqual(form.errors['board_name'][0], 'This field is required.')
+        self.assertEqual(
+            form.errors['board_name'][0],
+            'This field is required.')

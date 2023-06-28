@@ -11,19 +11,23 @@
     <!-- Hero -->
     <div class="row">
         {% for post in posts %}
+        {% if post.status %}
         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
             <div class="card mb-4" style="width: 25rem; height: 50rem;">
                 <div class="card-body">
                     <div class="image-container">
-                        {% if "placeholder" in post.featured_image.url %}
-                        <a href="{% url 'board_detail' post.slug %}">
-                            <img class="card-img-top img-fluid" src="https://res.cloudinary.com/dklz0mnqm/image/upload/v1677325023/default_picture.jpg" alt="{{ post.board_name }}">
-                        </a>
-                        {% else %}
-                        <a href="{% url 'board_detail' post.slug %}">
-                            <img class="card-img-top img-fluid" src="{{ post.featured_image.url }}" alt="{{ post.board_name }}">
-                        </a>
-                        {% endif %}
+
+                            {% if "placeholder" in post.featured_image.url %}
+                            <a href="{% url 'board_detail' post.slug %}">
+                                <img class="card-img-top img-fluid" src="https://res.cloudinary.com/dklz0mnqm/image/upload/v1677325023/default_picture.jpg" alt="{{ post.board_name }}">
+                            </a>
+                            {% else %}
+                            <a href="{% url 'board_detail' post.slug %}">
+                                <img class="card-img-top img-fluid" src="{{ post.featured_image.url }}" alt="{{ post.board_name }}">
+                            </a>
+                            {% endif %}
+                       
+                        
                         <div class="image-flash">
                             <p class="author">{{ post.category }} : {{ post.author }}</p>
                         </div>
@@ -59,7 +63,7 @@
                 <hr>
             </div>
         {% endif %}
-    
+    {% endif %}
     {% endfor %}
     </div>
     <div class="row justify-content-center"></div>

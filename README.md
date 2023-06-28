@@ -266,6 +266,7 @@ Project was managed in github's project area.
 - [CI Python Linter](https://pep8ci.herokuapp.com/) 
 - [W3C HTML validation](https://validator.w3.org/nu/)
 - [W3C CSS validation](https://jigsaw.w3.org/css-validator/)
+- [Autopep8](https://pypi.org/project/autopep8/)
 
 
 --------

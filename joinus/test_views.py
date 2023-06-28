@@ -12,8 +12,18 @@ class TestDjango(TestCase):
 
     def setUp(self):
         self.category = Category.objects.create(title='Drone', slug='drone')
-        self.user = User.objects.create_superuser(username="test", password="test", email="test@test.com")
-        self.post = BoardFeature(board_name="Test post", slug="test", author=self.user, category=self.category, manufacturer='test manufacturer', excerpt="Test excerpt", special_features="Test content", featured_image='test image', status=1)
+        self.user = User.objects.create_superuser(
+            username="test", password="test", email="test@test.com")
+        self.post = BoardFeature(
+            board_name="Test post",
+            slug="test",
+            author=self.user,
+            category=self.category,
+            manufacturer='test manufacturer',
+            excerpt="Test excerpt",
+            special_features="Test content",
+            featured_image='test image',
+            status=1)
         self.post.save()
 
     def test_get_post_list(self):
