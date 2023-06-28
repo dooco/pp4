@@ -4,8 +4,13 @@ A Code Institute course project requirement. You can see the deployed site [here
 
 [Gitpod] https://github.com/dooco/pp4
 
-User: Dan
-password: 
+[Gitpod Issues] https://github.com/dooco/pp4/issues
+
+[Gitpod Project] https://github.com/users/dooco/projects/6/views/1
+
+
+
+
 
 
 ## Project Overview
@@ -60,7 +65,7 @@ light background background colour: #445261
 text colour: #445261
 card image flash colour: #23BBBB
 
-The background and text colours were selected to give a good contrast as most of the blogs contain a good amount of text. The card background colour was chosen for to make the card stand out slightly against the main background of the site.
+The background and text colours were selected to give a good contrast as most of the blogs content consists of text. The card background colour was chosen for to make the card stand out slightly against the main background of the site.
 
 ### Fonts
 Fonts used are google fonts:
